@@ -15,7 +15,7 @@ module.exports = {
   /**
   * Get a post by id
   * @param {String} id The id of the post to search
-  * @return {Object} The post found or null
+  * @return {Post} The post found or null
   * @throws Will throw an error if post with the id searched does not exist
   **/
   get_post_by_id: async id => {
@@ -25,5 +25,14 @@ module.exports = {
     }
 
     return post
+  },
+  /**
+  * Add a post
+  * @param {string} title The title of the post
+  * @param {string} content The content of the post
+  * @return {Post} The post added with the id
+  **/
+  add_post_by_args: async ({ title, content }) => {
+    return await dbs.get_post_by_id({ title, content })
   }
 }

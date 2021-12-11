@@ -6,7 +6,6 @@
 
 const { ApolloServer } = require('apollo-server-express')
 const { makeExecutableSchema } = require('graphql-tools')
-const libs_string = require('@src/libs/string')
 const fs = require('fs')
 
 module.exports = {
@@ -50,41 +49,16 @@ module.exports = {
     return module.exports.get_services('src/services/mutations')
   },
   /**
-  * Get the resolver for multiple level queries from the services
-  * @return {Object} Return The resolvers
-  **/
-  get_resolvers_children: () => {
-    const result = {}
-    const resolvers = fs.readdirSync('src/services/resolvers')
-    const path_without_src = './services/resolvers'
-    resolvers.map(resolver => {
-      const filename_without_ext = resolver.split('.')[0]
-      const key = libs_string.capitalize(filename_without_ext)
-      result[key] = require(path_without_src + '/' + filename_without_ext)
-      return null
-    })
-    return result
-  },
-  /**
-  * Get the directives from the services
-  * @return {Object} Return The directives
-  **/
-  get_directives: () => {
-    return module.exports.get_services('src/services/directives')
-  },
-  /**
   * Get the resolvers from the services directory
   * @return {Object} Return The resolver
   **/
   get_resolvers: () => {
     const queries = module.exports.get_queries()
     const mutations = module.exports.get_mutations()
-    const resolvers_children = module.exports.get_resolvers_children()
 
     const resolvers = {
       Query: queries,
-      Mutation: mutations,
-      ...resolvers_children
+      Mutation: mutations
     }
     return resolvers
   },
@@ -95,12 +69,10 @@ module.exports = {
   create_schema: () => {
     const typeDefs = module.exports.get_types()
     const resolvers = module.exports.get_resolvers()
-    const directives = module.exports.get_directives()
 
     const schema = makeExecutableSchema({
       typeDefs,
       resolvers,
-      schemaDirectives: directives,
       resolverValidationOptions: {
         requireResolversForResolveType: false
       }
@@ -116,15 +88,7 @@ module.exports = {
     return new ApolloServer({
       schema,
       introspection: true,
-      playground: true,
-      context: ({ req }) => {
-        // get the authorization from the request headers
-        // return a context obj with our token. if any!
-        const auth = req.headers.authorization || ''
-        return {
-          auth
-        }
-      }
+      playground: true
     })
   },
   /**
