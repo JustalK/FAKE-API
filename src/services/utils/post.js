@@ -1,35 +1,29 @@
+/**
+* The utils function for managing the post
+* @module utils/post
+*/
 'use strict'
 
-const { gql } = require('apollo-server-express')
+const path = require('path')
+const filename = path.basename(__filename, '.js')
+const dbs = require('@src/dbs/' + filename)
 
 /**
- * The post object
- * @typedef {Object} Post
- * @property {string} name The title of the post
- * @property {string} content The title of the post
- * @property {boolean} deleted True if the post is deleted, or else false
- */
+* Manage the mutations for the post model
+**/
+module.exports = {
+  /**
+  * Get a post by id
+  * @param {String} id The id of the post to search
+  * @return {Object} The post found or null
+  * @throws Will throw an error if post with the id searched does not exist
+  **/
+  get_post_by_id: async id => {
+    const post = await dbs.get_post_by_id(id)
+    if (!post) {
+      throw new Error(`The post(${id}) does not exist.`)
+    }
 
-module.exports = gql`
-  """
-  The models for the post
-  """
-  type Post {
-    """
-    The id of a post
-    """
-    _id: String!
-    """
-    The title of a post
-    """
-    title: String!
-    """
-    The content of a post
-    """
-    content: String!
-    """
-    True if the post is deleted or not
-    """
-    deleted: Boolean
+    return post
   }
-`
+}
