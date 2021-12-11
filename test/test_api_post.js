@@ -23,6 +23,7 @@ test('[VISITOR] Get a post by id', async t => {
 
 test('[VISITOR] Get a post by id which does not exist', async t => {
   const response = await queries_post.get_post_by_id({ post_id: '5fd5b58efbc2f700' })
+  console.log(response.errors[0])
   t.is(response.errors[0].message, 'Cast to ObjectId failed for value "5fd5b58efbc2f700" (type string) at path "_id" for model "post"')
 })
 

@@ -7,6 +7,7 @@
 const path = require('path')
 const filename = path.basename(__filename, '.js')
 const dbs = require('@src/dbs/' + filename)
+const DocumentNotFound = require('@src/services/errors/documentNotFound')
 
 /**
 * Manage the mutations for the post model
@@ -21,7 +22,7 @@ module.exports = {
   get_post_by_id: async id => {
     const post = await dbs.get_post_by_id(id)
     if (!post) {
-      throw new Error(`The post(${id}) does not exist.`)
+      throw new DocumentNotFound(`The post(${id}) does not exist.`)
     }
 
     return post
