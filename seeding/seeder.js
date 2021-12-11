@@ -20,8 +20,9 @@ module.exports = {
   * Seed the database with the informations in data
   **/
   seed: async (folder = 'datas') => {
+    console.log('mongodb://' + process.env.DB_USER_DATA + ':' + process.env.DB_PASS_DATA + '@' + process.env.DB_URI_URL + ':' + process.env.DB_URI_PORT + '/' + process.env.DB_NAME + process.env.DB_URI_AUTHENTICATION_DB)
     const seeder = module.exports.get_seeder({
-      database: process.env.DB_URI_DATA + process.env.DB_NAME,
+      database: 'mongodb://' + process.env.DB_USER_DATA + ':' + process.env.DB_PASS_DATA + '@' + process.env.DB_URI_URL + ':' + process.env.DB_URI_PORT + '/' + process.env.DB_NAME + process.env.DB_URI_AUTHENTICATION_DB,
       dropDatabase: true
     })
 
