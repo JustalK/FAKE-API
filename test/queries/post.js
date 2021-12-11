@@ -20,5 +20,17 @@ module.exports = {
           }
         }`
     })
+  },
+  add_post_by_args: async ({ title, content }) => {
+    return m_utils.getter({
+      query: `
+        mutation {
+          add_post_by_args(title: "${title}", content: "${content}") {
+              title
+              content
+              deleted
+          }
+        }`
+    })
   }
 }
