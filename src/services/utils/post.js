@@ -33,6 +33,6 @@ module.exports = {
   * @return {Post} The post added with the id
   **/
   add_post_by_args: async ({ title, content }) => {
-    return await dbs.get_post_by_id({ title, content })
+    return await dbs.insert({ title, content })
   }
 }
