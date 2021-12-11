@@ -90,6 +90,7 @@ module.exports = {
       introspection: true,
       playground: true,
       formatError: (err) => {
+        console.log(err)
         return err
       }
     })

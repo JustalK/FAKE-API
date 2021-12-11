@@ -7,7 +7,7 @@
 const path = require('path')
 const filename = path.basename(__filename, '.js')
 const dbs = require('@src/dbs/' + filename)
-const DocumentNotFound = require('@src/services/errors/documentNotFound')
+const { DocumentNotFound } = require('@src/services/errors/documentNotFound')
 
 /**
 * Manage the mutations for the post model
