@@ -18,7 +18,7 @@ module.exports = gql`
     """
     The id of a post
     """
-    _id: String!
+    _id: ID!
     """
     The title of a post
     """

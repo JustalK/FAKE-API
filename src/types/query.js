@@ -3,6 +3,8 @@
 const { gql } = require('apollo-server-express')
 
 module.exports = gql`
+  scalar ID
+
   """
   Queries of the app
   """
@@ -12,6 +14,6 @@ module.exports = gql`
     """
     get_post_by_id(
       "The id of the post"
-      post_id: String!): Post!
+      post_id: ID!): Post!
   }
 `

@@ -27,10 +27,9 @@ test('[VISITOR] Trying to get a post by id which does not exist', async t => {
   t.is(response.errors[0].extensions.code, 'NOT_FOUND')
 })
 
-test.only('[VISITOR] Trying to get a post by id with an invalid mongoose ID', async t => {
+test('[VISITOR] Trying to get a post by id with an invalid mongoose ID', async t => {
   const response = await queries_post.get_post_by_id({ post_id: '5fd5b58efbc2f7' })
-  console.log(response)
-  t.is(response.errors[0].message, 'The id(5fd5b58efbc2f7) is not a valid ID.')
+  t.is(response.errors[0].message, 'Expected value of type "ID!", found "5fd5b58efbc2f7"; The id(5fd5b58efbc2f7) is not a valid ID.')
   t.is(response.errors[0].extensions.code, 'BAD_ID')
 })
 
