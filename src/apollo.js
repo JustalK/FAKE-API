@@ -88,11 +88,7 @@ module.exports = {
     return new ApolloServer({
       schema,
       introspection: true,
-      playground: true,
-      formatError: (err) => {
-        console.log(err)
-        return err
-      }
+      playground: true
     })
   },
   /**

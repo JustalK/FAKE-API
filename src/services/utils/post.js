@@ -22,7 +22,7 @@ module.exports = {
   get_post_by_id: async id => {
     const post = await dbs.get_post_by_id(id)
     if (!post) {
-      throw new DocumentNotFound(`The post(${id}) does not exist.`)
+      throw new DocumentNotFound(id)
     }
 
     return post
