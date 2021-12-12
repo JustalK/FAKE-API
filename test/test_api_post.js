@@ -21,10 +21,17 @@ test('[VISITOR] Get a post by id', async t => {
   t.is(response.get_post_by_id.deleted, false)
 })
 
-test('[VISITOR] Get a post by id which does not exist', async t => {
+test('[VISITOR] Trying to get a post by id which does not exist', async t => {
   const response = await queries_post.get_post_by_id({ post_id: '5fd5b58efbc2f7a33c2aa000' })
   t.is(response.errors[0].message, 'The object with id(5fd5b58efbc2f7a33c2aa000) does not exist.')
   t.is(response.errors[0].extensions.code, 'NOT_FOUND')
+})
+
+test.only('[VISITOR] Trying to get a post by id with an invalid mongoose ID', async t => {
+  const response = await queries_post.get_post_by_id({ post_id: '5fd5b58efbc2f7' })
+  console.log(response)
+  t.is(response.errors[0].message, 'The id(5fd5b58efbc2f7) is not a valid ID.')
+  t.is(response.errors[0].extensions.code, 'BAD_ID')
 })
 
 test('[VISITOR] Add a post by args', async t => {
