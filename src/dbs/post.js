@@ -11,11 +11,11 @@ const model = require('@src/models/' + filename)
 module.exports = {
   /**
   * Call mongodb for getting a post by id
-  * @param {String} id The id to search
+  * @param {String} _id The id to search
   * @return {Post} The post found or null
   **/
-  get_post_by_id: id => {
-    return model.findOne({ _id: id })
+  get_post_by_id: _id => {
+    return model.findOne({ _id })
   },
   /**
   * Call mongodb for adding a post to the database
@@ -25,5 +25,13 @@ module.exports = {
   **/
   insert: ({ title, content }) => {
     return model.create({ title, content })
+  },
+  /**
+  * Call mongodb for testing the existence of a post by id
+  * @param {String} _id The id to search
+  * @return {boolean} True if a document exist or else False
+  **/
+  test_post_by_id: _id => {
+    return model.exists({ _id })
   }
 }

@@ -14,6 +14,6 @@ module.exports = gql`
     """
     get_post_by_id(
       "The id of the post"
-      post_id: ID!): Post!
+      post_id: ID!): Post! @isPostExist
   }
 `

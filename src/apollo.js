@@ -50,6 +50,13 @@ module.exports = {
     return module.exports.get_services('src/services/mutations')
   },
   /**
+  * Get the directives from the services
+  * @return {Object} Return The directives
+  **/
+  get_directives: () => {
+    return module.exports.get_services('src/services/directives')
+  },
+  /**
   * Get the resolvers from the services directory
   * @return {Object} Return The resolver
   **/
@@ -71,10 +78,12 @@ module.exports = {
   create_schema: () => {
     const typeDefs = module.exports.get_types()
     const resolvers = module.exports.get_resolvers()
+    const directives = module.exports.get_directives()
 
     const schema = makeExecutableSchema({
       typeDefs,
       resolvers,
+      schemaDirectives: directives,
       resolverValidationOptions: {
         requireResolversForResolveType: false
       }
