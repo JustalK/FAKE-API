@@ -15,7 +15,6 @@ module.exports = {
 
     const response = await fetch('http://' + process.env.HOST + ':' + process.env.PORT + process.env.ENDPOINT, options)
     const response_json = await response.json()
-    console.log(response_json)
     return response_json.errors !== undefined ? response_json : response_json.data
   }
 }

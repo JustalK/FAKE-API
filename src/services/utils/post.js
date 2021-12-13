@@ -44,6 +44,15 @@ module.exports = {
     return await dbs.insert({ title, content })
   },
   /**
+  * Update a post
+  * @param {string} title The title of the post
+  * @param {string} content The content of the post
+  * @return {Post} The post added with the id
+  **/
+  update_post_by_id: async (_id, update) => {
+    return await dbs.update_by_id(_id, update)
+  },
+  /**
   * Test the post if a post exist in the db with this id
   * @param {String} id The id to test
   * @return {boolean} True if the post exist or else False

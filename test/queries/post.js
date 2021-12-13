@@ -54,6 +54,26 @@ module.exports = {
     })
   },
   /**
+  * Update a post
+  * @param {String} post_id The id of the post to update
+  * @param {String} title The new title of the post
+  * @param {String} content The new content of the post
+  * @param {Boolean} content The new status of the post
+  * @return {Post} The post updated
+  **/
+  update_post_by_id: async (post_id, { title, content, deleted }) => {
+    return m_utils.getter({
+      query: `
+        mutation {
+          update_post_by_id(post_id: "${post_id}", title: "${title}", content: "${content}", deleted: ${deleted}) {
+            title
+            content
+            deleted
+          }
+        }`
+    })
+  },
+  /**
   * Make a graphql mutation to the API for adding a post
   * @param {String} title The title of the post
   * @param {String} content The content of the post

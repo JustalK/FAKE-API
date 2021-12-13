@@ -34,3 +34,10 @@ test('[VISITOR] Add a post by args with wrong title type', async t => {
   const response = await queries_post.error_add_post_by_args({ title: 12, content: 'My test content' })
   t.is(response.errors[0].message, 'String cannot represent a non string value: 12')
 })
+
+test.only('[VISITOR] Update a post', async t => {
+  const response = await queries_post.update_post_by_id('5fd5b58efbc2f7a33c2aa001', { title: 'Updated title', content: 'The updated content', deleted: false })
+  t.is(response.update_post_by_id.title, 'Updated title')
+  t.is(response.update_post_by_id.content, 'The updated content')
+  t.is(response.update_post_by_id.deleted, false)
+})

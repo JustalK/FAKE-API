@@ -53,6 +53,15 @@ module.exports = {
     return model.create({ title, content })
   },
   /**
+  * Update a post in mongodb respecting the condtion
+  * @param {String} _id The id of the post to update
+  * @param {Object} update The update to apply
+  * @return {Post} The post updated or null
+  **/
+  update_by_id: (_id, update) => {
+    return model.findOneAndUpdate({ _id }, update, { new: true })
+  },
+  /**
   * Call mongodb for testing the existence of a post by id
   * @param {String} _id The id to search
   * @return {boolean} True if a document exist or else False
