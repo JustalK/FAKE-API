@@ -100,12 +100,12 @@ test('[VISITOR] Get no posts with filter on content', async t => {
   t.is(response.get_posts.length, 0)
 })
 
-test.only('[VISITOR] Get no posts with filter on title and content with joint and', async t => {
+test('[VISITOR] Get no posts with filter on title and content with joint and', async t => {
   const response = await queries_post.get_posts({ title: /The only post/, content: /zzZZZzzzzZZZ/, joint: constants.joint_and })
   t.is(response.get_posts.length, 0)
 })
 
-test.only('[VISITOR] Get all posts with filter on title and content with joint or', async t => {
+test('[VISITOR] Get all posts with filter on title and content with joint or', async t => {
   const response = await queries_post.get_posts({ title: /The only post/, content: /zzZZZzzzzZZZ/, joint: constants.joint_or })
   t.is(response.get_posts.length, 1)
   t.is(response.get_posts[0].title, 'The only post not randomly created')
