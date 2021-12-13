@@ -111,3 +111,14 @@ test('[VISITOR] Get all posts with filter on title and content with joint or', a
   t.is(response.get_posts[0].title, 'The only post not randomly created')
   t.is(response.get_posts[0].content, 'The content of the only post not created randomly.')
 })
+
+test('[VISITOR] Get all posts sorted with title and content', async t => {
+  const response_sorted_title = await queries_post.get_posts({ sort: 'title' })
+  const response_sorted_content = await queries_post.get_posts({ sort: 'content' })
+  t.not(response_sorted_title.get_posts[0], response_sorted_content.get_posts[0])
+})
+
+test('[VISITOR] Get all posts sorted with a key that does not exist', async t => {
+  const response = await queries_post.get_posts({ sort: 'try' })
+  t.is(response.errors[0].message, 'The key (try) is not available for sorting')
+})
