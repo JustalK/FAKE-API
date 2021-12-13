@@ -32,7 +32,7 @@ module.exports = {
   * @return {[Post]} The posts restricted by the filters
   **/
   get_all_posts: async ({ limit, skip, sort, order, title, content, joint }) => {
-    return dbs.get_all_users({ limit, skip, sort, order, joint, title, content })
+    return dbs.get_posts({ limit, skip, sort, order, joint, title, content })
   },
   /**
   * Add a post

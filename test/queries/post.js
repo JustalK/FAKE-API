@@ -32,7 +32,7 @@ module.exports = {
   * @param {RegExp} content Limit the result to a certain pattern of content
   * @return {[Post]} The posts searched or empty array
   **/
-  get_posts: async ({ limit = null, sort = null, order = null, joint = null, title = null, content = null }, token) => {
+  get_posts: async ({ limit = null, sort = null, order = null, joint = null, title = null, content = null }) => {
     const params = []
     limit && params.push(`limit: ${limit}`)
     sort && params.push(`sort: "${sort}"`)
@@ -40,6 +40,7 @@ module.exports = {
     joint && params.push(`joint: "${joint}"`)
     title && params.push(`username: "${title}"`)
     content && params.push(`email: "${content}"`)
+
     return m_utils.getter({
       query: `
         query {
@@ -49,7 +50,7 @@ module.exports = {
             deleted
           }
         }`
-    }, token)
+    })
   },
   /**
   * Make a graphql mutation to the API for adding a post

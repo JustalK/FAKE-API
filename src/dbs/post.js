@@ -29,7 +29,7 @@ module.exports = {
   * @param {RegExp} content Limit the result to a certain pattern of content
   * @return {[Post]} The posts restricted by the filters
   **/
-  get_all_users: ({ limit, skip, sort, order, joint, title, content }) => {
+  get_posts: ({ limit, skip, sort, order, joint, title, content }) => {
     const matches = []
 
     if (title !== null) {

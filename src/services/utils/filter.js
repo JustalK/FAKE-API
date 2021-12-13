@@ -19,6 +19,14 @@ module.exports = {
     return limit !== null ? limit : null
   },
   /**
+  * Handle the skip argument
+  * @param {Int} skip The argument to handle
+  * @return {Int|null} Return the skip or 0
+  **/
+  handle_skip_argument: skip => {
+    return skip || 0
+  },
+  /**
   * Handle the order argument
   * @param {String} order The argument to handle
   * @return {String} Return the order to use for the query

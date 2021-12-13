@@ -33,6 +33,12 @@ test('[VISITOR] Trying to get a post by id with an invalid mongoose ID', async t
   t.is(response.errors[0].extensions.code, 'BAD_ID')
 })
 
+test('[VISITOR] Get all posts without filters', async t => {
+  const response = await queries_post.get_posts({})
+  // The random post + the static one
+  t.is(response.get_posts.length, parseInt(process.env.SEEDING_NUMBER) + 1)
+})
+
 test('[VISITOR] Add a post by args', async t => {
   const response = await queries_post.add_post_by_args({ title: 'My test title', content: 'My test content' })
   t.is(response.add_post_by_args.title, 'My test title')

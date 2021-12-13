@@ -22,14 +22,14 @@ module.exports = {
 
     // Sort the result
     order = order === constants.order_descending ? 1 : -1
-    sort = sort !== null ? { [sort]: order } : { _id: order }
+    sort = sort ? { [sort]: order } : { _id: order }
     aggregation.push({ $sort: sort })
 
     // Limit the result
     aggregation.push({ $skip: skip })
 
     // Limit the result
-    if (limit !== null) {
+    if (limit) {
       aggregation.push({ $limit: limit })
     }
 
