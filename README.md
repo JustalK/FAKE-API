@@ -1,13 +1,20 @@
-# SERVER-API
+# TEST-API
 
 [![Travis](https://img.shields.io/travis/com/justalk/server-api.svg?style=flat-square)](https://travis-ci.com/github/JustalK/server-api)
 [![Coverage Status](https://coveralls.io/repos/github/JustalK/SERVER-API/badge.svg?branch=master)](https://coveralls.io/github/JustalK/SERVER-API?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7e6edeed2150efaa35bd/maintainability)](https://codeclimate.com/github/JustalK/SERVER-API/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/7e6edeed2150efaa35bd/test_coverage)](https://codeclimate.com/github/JustalK/SERVER-API/test_coverage)
 
-This project is a fresh starter for creating a **REST API** with all my favorite tools.
+This project is a simple fake API. For testing purpose on my different projects, I was using most of the time one of the API below :
 
-The server is using the library `Express` but it can be switch easily in the **server.js** file for Fastify or Restify. The server is linked to the library `Apollo-server` for managing the data with `GraphQL`. The database is handle by `MongoDB` and can also be easily switch in **database.js**.
+- https://randomuser.me/
+- https://jsonplaceholder.typicode.com/
+
+Those projects are quite nice but they are missing some features. The most obvious one are the filters.
+I needed for few projects an api with some limit and skip filter for creating a pagination. Since the API was not done and I was handling only the Frontend, I needed a bunch of fake data for already coding the pages.
+Since I was not able to find online any fake api which have those filters, I decided to create my own fake API. And since I was on it, why not make it as beautiful as possible ? This is why you will find a quite high coverage, many comment across the code, a complete jsdoc and a really nice architecture.
+
+The server is using the library `Express` but it can be switch easily in the **server.js** file for Fastify or Restify. The server is linked to the library `Apollo-server` for managing the data with `GraphQL`. The database is handle by `MongoDB` and can also be easily switch in **database.js**. The data come from the seed and are populating the db at each restart of the server.
 
 The models are found in the folder **models**. Their schema are described with `mongoose` and also typed for using `GraphQL`.
 
