@@ -45,12 +45,20 @@ module.exports = {
   },
   /**
   * Update a post
-  * @param {string} title The title of the post
-  * @param {string} content The content of the post
-  * @return {Post} The post added with the id
+  * @param {string} id The id of the post to update
+  * @param {Object} update The data to update
+  * @return {Post} The post updated
   **/
-  update_post_by_id: async (_id, update) => {
-    return await dbs.update_by_id(_id, update)
+  update_post_by_id: async (id, update) => {
+    return await dbs.update_by_id(id, update)
+  },
+  /**
+  * Delete a post
+  * @param {string} id The id of the post to delete
+  * @return {Post} The post deleted
+  **/
+  delete_post_by_id: async (id) => {
+    return await dbs.delete_by_id(id)
   },
   /**
   * Test the post if a post exist in the db with this id

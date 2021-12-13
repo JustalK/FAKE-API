@@ -20,7 +20,7 @@ module.exports = gql`
     Update a post
     """
     update_post_by_id(
-      "Id of the pos to editt"
+      "Id of the post to edit"
       post_id: ID!,
       "The title of the post"
       title: String,
@@ -28,5 +28,12 @@ module.exports = gql`
       content: String,
       "The status of the post"
       deleted: Boolean): Post! @isPostExist
+
+    """
+    Delete a post
+    """
+    delete_post_by_id(
+      "Id of the post to delete"
+      post_id: ID!): Boolean! @isPostExist
   }
 `

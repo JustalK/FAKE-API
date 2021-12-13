@@ -26,5 +26,14 @@ module.exports = {
     delete update.post_id
 
     return utils_post.update_post_by_id(_id, update)
+  },
+  /**
+  * Mutation for deleting a post
+  * @param {Post} Return the post deleted
+  **/
+  delete_post_by_id: async (_, args) => {
+    const rsl = await utils_post.delete_post_by_id(args.post_id)
+    const { deletedCount } = rsl
+    return deletedCount === 1
   }
 }

@@ -62,6 +62,14 @@ module.exports = {
     return model.findOneAndUpdate({ _id }, update, { new: true })
   },
   /**
+  * Delete a post in mongodb by id
+  * @param {String} _id The id of the post to delete
+  * @return {Post} The post deleted or null
+  **/
+  delete_by_id: (_id) => {
+    return model.deleteOne({ _id })
+  },
+  /**
   * Call mongodb for testing the existence of a post by id
   * @param {String} _id The id to search
   * @return {boolean} True if a document exist or else False

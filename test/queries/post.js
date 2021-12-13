@@ -74,6 +74,19 @@ module.exports = {
     })
   },
   /**
+  * Delete a post
+  * @param {String} post_id The id of the post to delete
+  * @return {Post} The post deleted
+  **/
+  delete_post_by_id: async (post_id) => {
+    return m_utils.getter({
+      query: `
+        mutation {
+          delete_post_by_id(post_id: "${post_id}")
+        }`
+    })
+  },
+  /**
   * Make a graphql mutation to the API for adding a post
   * @param {String} title The title of the post
   * @param {String} content The content of the post
