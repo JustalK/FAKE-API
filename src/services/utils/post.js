@@ -21,6 +21,20 @@ module.exports = {
     return dbs.get_post_by_id(id)
   },
   /**
+  * Return multiple posts passing the filters
+  * @param {Int} limit Limit the number of result returned
+  * @param {Int} skip Skip a certain amount of result
+  * @param {String} sort Sort the result by field name
+  * @param {String} order Order the result ASC or DESC
+  * @param {String} joint Either join by `and` or `or`
+  * @param {RegExp} title  Limit the result to a certain pattern of title
+  * @param {RegExp} content Limit the result to a certain pattern of content
+  * @return {[Post]} The posts restricted by the filters
+  **/
+  get_all_posts: async ({ limit, skip, sort, order, title, content, joint }) => {
+    return dbs.get_all_users({ limit, skip, sort, order, joint, title, content })
+  },
+  /**
   * Add a post
   * @param {string} title The title of the post
   * @param {string} content The content of the post
