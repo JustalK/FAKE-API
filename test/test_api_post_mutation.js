@@ -42,7 +42,7 @@ test('[VISITOR] Update a post', async t => {
   t.is(response.update_post_by_id.deleted, false)
 })
 
-test.only('[VISITOR] Delete a post', async t => {
+test('[VISITOR] Delete a post', async t => {
   const response = await queries_post.delete_post_by_id('5fd5b58efbc2f7a33c2aa001')
   t.is(response.delete_post_by_id, true)
   const response_deleted = await queries_post.delete_post_by_id('5fd5b58efbc2f7a33c2aa001')
