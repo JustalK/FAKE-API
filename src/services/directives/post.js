@@ -5,6 +5,7 @@
 
 const { SchemaDirectiveVisitor } = require('apollo-server-express')
 const utils_post = require('@src/services/utils/post')
+const { DocumentNotFound } = require('@src/services/errors/documentNotFound')
 
 /**
 * Create a directive for managing the existence of the post
@@ -14,13 +15,12 @@ class isPostExist extends SchemaDirectiveVisitor {
     const { resolve } = field
     field.resolve = async function (...args) {
       const params = args[1]
-      console.log(params)
-      /**
-      const post = await dbs.get_post_by_id(id)
+      const { post_id } = params
+      const post = await utils_post.is_post_exist_by_id(post_id)
       if (!post) {
-        throw new DocumentNotFound(id)
+        throw new DocumentNotFound(post_id)
       }
-      **/
+
       return await resolve.apply(this, args)
     }
   }

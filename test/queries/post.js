@@ -22,10 +22,30 @@ module.exports = {
     })
   },
   add_post_by_args: async ({ title, content }) => {
+    const params = []
+    title && params.push(`title: "${title}"`)
+    content && params.push(`content: "${content}"`)
+
     return m_utils.getter({
       query: `
         mutation {
-          add_post_by_args(title: "${title}", content: "${content}") {
+          add_post_by_args(${params.join()}) {
+              title
+              content
+              deleted
+          }
+        }`
+    })
+  },
+  error_add_post_by_args: async ({ title, content }) => {
+    const params = []
+    title && params.push(`title: ${title}`)
+    content && params.push(`content: "${content}"`)
+
+    return m_utils.getter({
+      query: `
+        mutation {
+          add_post_by_args(${params.join()}) {
               title
               content
               deleted

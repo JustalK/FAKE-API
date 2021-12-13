@@ -7,7 +7,6 @@
 const path = require('path')
 const filename = path.basename(__filename, '.js')
 const dbs = require('@src/dbs/' + filename)
-const { DocumentNotFound } = require('@src/services/errors/documentNotFound')
 
 /**
 * Manage the mutations for the post model
@@ -17,16 +16,9 @@ module.exports = {
   * Get a post by id
   * @param {String} id The id of the post to search
   * @return {Post} The post found or null
-  * @throws {InvalidID} Will throw an error if the id is not a valid mongoose ID
-  * @throws {DocumentNotFound} Will throw an error if post with the id searched does not exist
   **/
   get_post_by_id: async id => {
-    const post = await dbs.get_post_by_id(id)
-    if (!post) {
-      throw new DocumentNotFound(id)
-    }
-
-    return post
+    return dbs.get_post_by_id(id)
   },
   /**
   * Add a post
@@ -36,5 +28,13 @@ module.exports = {
   **/
   add_post_by_args: async ({ title, content }) => {
     return await dbs.insert({ title, content })
+  },
+  /**
+  * Test the post if a post exist in the db with this id
+  * @param {String} id The id to test
+  * @return {boolean} True if the post exist or else False
+  **/
+  is_post_exist_by_id: async id => {
+    return dbs.test_post_by_id(id)
   }
 }
