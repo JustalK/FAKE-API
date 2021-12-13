@@ -4,6 +4,7 @@ const { gql } = require('apollo-server-express')
 
 module.exports = gql`
   scalar ID
+  scalar Regex
 
   """
   Queries of the app
@@ -31,9 +32,9 @@ module.exports = gql`
       "Define the joint for multiple matching parameter 'and' or 'or'"
       joint: String,
       "Regex matching the title"
-      title: String,
+      title: Regex,
       "Regex matching the content"
-      content: String,
+      content: Regex,
       "True for getting only deleted post, false for not deleted post"
       deleted: Boolean,
       "Match an array of ID"

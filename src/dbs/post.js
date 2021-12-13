@@ -37,11 +37,10 @@ module.exports = {
     }
 
     if (content !== null) {
-      matches.push({ content: { $regex: title } })
+      matches.push({ content: { $regex: content } })
     }
 
     const aggregation = libs_dbs.handle_classic_filters({ matches, skip, order, sort, limit, joint })
-    console.log(aggregation[0].$match)
     return model.aggregate(aggregation)
   },
   /**

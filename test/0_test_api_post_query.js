@@ -76,10 +76,26 @@ test('[VISITOR] Get all posts with order', async t => {
   t.is(response_descending.get_posts[0].content, last_response_ascending.content)
 })
 
-/**
-test.only('[VISITOR] Get all posts with filter on title', async t => {
-  const response = await queries_post.get_posts({ title: /post/ })
-  console.log(response)
-  t.is(response.get_posts.title, null)
+test('[VISITOR] Get all posts with filter on title', async t => {
+  const response = await queries_post.get_posts({ title: /The only post/ })
+  t.is(response.get_posts.length, 1)
+  t.is(response.get_posts[0].title, 'The only post not randomly created')
+  t.is(response.get_posts[0].content, 'The content of the only post not created randomly.')
 })
-**/
+
+test('[VISITOR] Get bo posts with filter on title', async t => {
+  const response = await queries_post.get_posts({ title: /zzZZZzzzzZZZ/ })
+  t.is(response.get_posts.length, 0)
+})
+
+test('[VISITOR] Get all posts with filter on content', async t => {
+  const response = await queries_post.get_posts({ content: /content of/ })
+  t.is(response.get_posts.length, 1)
+  t.is(response.get_posts[0].title, 'The only post not randomly created')
+  t.is(response.get_posts[0].content, 'The content of the only post not created randomly.')
+})
+
+test('[VISITOR] Get bo posts with filter on content', async t => {
+  const response = await queries_post.get_posts({ content: /Idontexist/ })
+  t.is(response.get_posts.length, 0)
+})

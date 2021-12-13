@@ -7,6 +7,7 @@
 const { ApolloServer } = require('apollo-server-express')
 const { makeExecutableSchema } = require('graphql-tools')
 const ID = require('@src/services/scalars/id')
+const Regex = require('@src/services/scalars/regex')
 const fs = require('fs')
 
 module.exports = {
@@ -66,6 +67,7 @@ module.exports = {
 
     const resolvers = {
       ID,
+      Regex,
       Query: queries,
       Mutation: mutations
     }
