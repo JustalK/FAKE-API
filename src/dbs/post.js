@@ -41,6 +41,7 @@ module.exports = {
     }
 
     const aggregation = libs_dbs.handle_classic_filters({ matches, skip, order, sort, limit, joint })
+    console.log(aggregation[0].$match)
     return model.aggregate(aggregation)
   },
   /**
