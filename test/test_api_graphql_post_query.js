@@ -3,7 +3,7 @@
 require('dotenv').config({ path: './env/.env.test' })
 require('isomorphic-fetch')
 require('module-alias/register')
-const queries_post = require('@test/queries/post')
+const queries_post = require('@test/graphql/post')
 const constants = require('@src/libs/constants')
 
 const test = require('ava')

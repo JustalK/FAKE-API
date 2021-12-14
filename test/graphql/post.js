@@ -10,7 +10,7 @@ module.exports = {
   * @return {Post} The post searched or null
   **/
   get_post_by_id: async ({ post_id }) => {
-    return m_utils.getter({
+    return m_utils.all_graphql({
       query: `
         query {
           get_post_by_id(post_id: "${post_id}") {
@@ -42,7 +42,7 @@ module.exports = {
     title && params.push(`title: "${title}"`)
     content && params.push(`content: "${content}"`)
 
-    return m_utils.getter({
+    return m_utils.all_graphql({
       query: `
         query {
           get_posts${params.length > 0 ? '(' + params.join() + ')' : ''} {
@@ -62,7 +62,7 @@ module.exports = {
   * @return {Post} The post updated
   **/
   update_post_by_id: async (post_id, { title, content, deleted }) => {
-    return m_utils.getter({
+    return m_utils.all_graphql({
       query: `
         mutation {
           update_post_by_id(post_id: "${post_id}", title: "${title}", content: "${content}", deleted: ${deleted}) {
@@ -79,7 +79,7 @@ module.exports = {
   * @return {Post} The post deleted
   **/
   delete_post_by_id: async (post_id) => {
-    return m_utils.getter({
+    return m_utils.all_graphql({
       query: `
         mutation {
           delete_post_by_id(post_id: "${post_id}")
@@ -97,7 +97,7 @@ module.exports = {
     title && params.push(`title: "${title}"`)
     content && params.push(`content: "${content}"`)
 
-    return m_utils.getter({
+    return m_utils.all_graphql({
       query: `
         mutation {
           add_post_by_args(${params.join()}) {
@@ -119,7 +119,7 @@ module.exports = {
     title && params.push(`title: ${title}`)
     content && params.push(`content: "${content}"`)
 
-    return m_utils.getter({
+    return m_utils.all_graphql({
       query: `
         mutation {
           add_post_by_args(${params.join()}) {

@@ -64,6 +64,7 @@ module.exports = {
     module.exports.register_helmet(server)
 
     server.use('/', require('./routes/app'))
+    server.use('/post', require('./routes/post'))
 
     return new Promise((resolve, reject) => {
       server.listen({ port: port, host: host }, (error) => module.exports.callback(error, resolve, reject))
