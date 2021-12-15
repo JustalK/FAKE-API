@@ -14,12 +14,28 @@ test.before(async () => {
   await m_seeding.seed()
 })
 
-test.only('[VISITOR][REST] Get all posts', async t => {
+test('[VISITOR][REST] Get all posts', async t => {
   const response = await queries_post.get_posts('/post', {})
   t.is(response.length, parseInt(process.env.SEEDING_NUMBER) + 1)
 })
 
-test.only('[VISITOR][REST] Get all posts with limit', async t => {
+test('[VISITOR][REST] Get all posts with limit', async t => {
   const response = await queries_post.get_posts('/post', { limit: 1 })
   t.is(response.length, 1)
+})
+
+test('[VISITOR][REST] Get all posts with limit and skip', async t => {
+  const response_limit_2 = await queries_post.get_posts('/post', { limit: 2 })
+  t.is(response_limit_2.length, 2)
+  const response_limit_1 = await queries_post.get_posts('/post', { limit: 1, skip: 1 })
+  t.is(response_limit_1.length, 1)
+  t.is(response_limit_2[1].title, response_limit_1[0].title)
+  t.is(response_limit_2[1].content, response_limit_1[0].content)
+})
+
+test.only('[VISITOR][REST] Get all posts with title without space', async t => {
+  const response = await queries_post.get_posts('/post', { title: 'post' })
+  t.is(response.length, 1)
+  t.is(response[0].title, 'The only post not randomly created')
+  t.is(response[0].content, 'The content of the only post not created randomly.')
 })
