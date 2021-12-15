@@ -9,7 +9,9 @@ module.exports = {
   * @return {[Post]} The posts searched or empty array
   **/
   get_posts: async (url, { limit }) => {
-    const params = limit ? `?limit=${limit}` : ''
-    return m_utils.get_rest(url + params)
+    const params = []
+    limit && params.push(`limit=${limit}`)
+    const queries = params.length > 0 ? `?${params.join('&')}` : ''
+    return m_utils.get_rest(url + queries)
   }
 }
