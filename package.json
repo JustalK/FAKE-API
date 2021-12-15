@@ -69,6 +69,8 @@
     "files": [
       "test/**/*",
       "!test/libs",
+      "!test/graphql",
+      "!test/rest",
       "!test/queries"
     ]
   },

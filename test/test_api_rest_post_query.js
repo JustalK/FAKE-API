@@ -15,6 +15,11 @@ test.before(async () => {
 })
 
 test.only('[VISITOR][REST] Get all posts', async t => {
-  const response = await queries_post.get_posts('/post')
+  const response = await queries_post.get_posts('/post', {})
   t.is(response.length, parseInt(process.env.SEEDING_NUMBER) + 1)
+})
+
+test.only('[VISITOR][REST] Get all posts with limit', async t => {
+  const response = await queries_post.get_posts('/post', { limit: 1 })
+  t.is(response.length, 1)
 })

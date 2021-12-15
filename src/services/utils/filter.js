@@ -16,7 +16,7 @@ module.exports = {
   * @return {Int|null} Return the limit or null
   **/
   handle_limit_argument: limit => {
-    return limit !== null ? limit : null
+    return limit !== null ? parseInt(limit) : null
   },
   /**
   * Handle the skip argument
@@ -24,7 +24,7 @@ module.exports = {
   * @return {Int|null} Return the skip or 0
   **/
   handle_skip_argument: skip => {
-    return skip || 0
+    return parseInt(skip || 0)
   },
   /**
   * Handle the order argument

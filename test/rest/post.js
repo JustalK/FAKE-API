@@ -8,7 +8,8 @@ module.exports = {
   * Make a rest request query to the API for getting muliple posts restricted by the filters
   * @return {[Post]} The posts searched or empty array
   **/
-  get_posts: async () => {
-    return m_utils.get_rest('/post')
+  get_posts: async (url, { limit }) => {
+    const params = limit ? `?limit=${limit}` : ''
+    return m_utils.get_rest(url + params)
   }
 }

@@ -7,6 +7,8 @@
 const path = require('path')
 const filename = path.basename(__filename, '.js')
 const dbs = require('@src/dbs/' + filename)
+const utils_filter = require('@src/services/utils/filter')
+const Post = require('@src/models/' + filename)
 
 /**
 * Manage the mutations for the post model
@@ -31,7 +33,14 @@ module.exports = {
   * @param {RegExp} content Limit the result to a certain pattern of content
   * @return {[Post]} The posts restricted by the filters
   **/
-  get_all_posts: async ({ limit, skip, sort, order, title, content, joint }) => {
+  get_all_posts: async (args) => {
+    const limit = utils_filter.handle_limit_argument(args.limit)
+    const sort = utils_filter.handle_sort_argument(args.sort, Post)
+    const skip = utils_filter.handle_skip_argument(args.skip)
+    const order = utils_filter.handle_order_argument(args.order)
+    const joint = utils_filter.handle_joint_argument(args.joint)
+    const title = utils_filter.handle_match_argument(args.title)
+    const content = utils_filter.handle_match_argument(args.content)
     return dbs.get_posts({ limit, skip, sort, order, joint, title, content })
   },
   /**
