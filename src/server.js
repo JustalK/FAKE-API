@@ -63,7 +63,7 @@ module.exports = {
 
     const openapiSpecification = swaggerJsdoc(options)
 
-    server.use('/api', swaggerUi.serve, swaggerUi.setup(openapiSpecification))
+    server.use('/api/rest', swaggerUi.serve, swaggerUi.setup(openapiSpecification))
   },
   /**
   * Allow us to use the middleware helmet for hidding some headers
