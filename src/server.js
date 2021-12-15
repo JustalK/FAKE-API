@@ -58,7 +58,7 @@ module.exports = {
           url: 'http://' + process.env.HOST + ':' + process.env.PORT
         }]
       },
-      apis: ['./src/routes*.js']
+      apis: ['src/routes/app.js']
     }
 
     const openapiSpecification = swaggerJsdoc(options)

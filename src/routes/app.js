@@ -9,7 +9,15 @@ const router = express.Router()
 const fs = require('fs')
 const marked = require('marked')
 
-// Add an endpoint for testing the API
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     description: Welcome to swagger-jsdoc!
+ *     responses:
+ *       200:
+ *         description: Returns a mysterious string.
+ */
 router.get('/', async (request, response) => {
   response.send({
     status: 'working'
