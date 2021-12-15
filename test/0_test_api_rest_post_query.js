@@ -47,7 +47,14 @@ test('[VISITOR][REST] Get all posts with title with space', async t => {
   t.is(response[0].content, 'The content of the only post not created randomly.')
 })
 
-test.only('[VISITOR][REST] Get no posts with title that does not exist', async t => {
+test('[VISITOR][REST] Get no posts with title that does not exist', async t => {
   const response = await queries_post.get_posts('/post', { title: 'ZzzzzZZZ' })
   t.is(response.length, 0)
+})
+
+test('[VISITOR][REST] Get all posts with title with regex', async t => {
+  const response = await queries_post.get_posts('/post', { title: 'post.*' })
+  t.is(response.length, 1)
+  t.is(response[0].title, 'The only post not randomly created')
+  t.is(response[0].content, 'The content of the only post not created randomly.')
 })
