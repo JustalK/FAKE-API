@@ -12,9 +12,9 @@ module.exports = {
     const params = []
     limit && params.push(`limit=${limit}`)
     skip && params.push(`skip=${skip}`)
-    sort && params.push(`sort="${sort}"`)
-    order && params.push(`order="${order}"`)
-    joint && params.push(`joint="${joint}"`)
+    sort && params.push(`sort=${sort}`)
+    order && params.push(`order=${order}`)
+    joint && params.push(`joint=${joint}`)
     title && params.push(`title=${title}`)
     content && params.push(`content=${content}`)
 

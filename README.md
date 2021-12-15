@@ -14,13 +14,7 @@ Those projects are quite nice but they are missing some features. The most obvio
 I needed for few projects an api with some limit and skip filter for creating a pagination. Since the API was not done and I was handling only the Frontend, I needed a bunch of fake data for already coding the pages.
 Since I was not able to find online any fake api which have those filters, I decided to create my own fake API. And since I was on it, why not make it as beautiful as possible ? This is why you will find a quite high coverage, many comment across the code, a complete jsdoc and a really nice architecture.
 
-The server is using the library `Express` but it can be switch easily in the **server.js** file for Fastify or Restify. The server is linked to the library `Apollo-server` for managing the data with `GraphQL`. The database is handle by `MongoDB` and can also be easily switch in **database.js**. The data come from the seed and are populating the db at each restart of the server.
-
-The models are found in the folder **models**. Their schema are described with `mongoose` and also typed for using `GraphQL`.
-
-The continuous integration is handled with `Travis` and the coverage is checked by `Coveralls` and `Codeclimate` for checking the level of maintainability of the code. Finally, I use `Ava` for making the test cases. For fixing the style, I use `Eslint`.
-
-Before committing, `Husky` will force the tests to be run and will validate or not the new push.
+I made the API in two version, one is a `graphql` version, the other one is a `rest` version. They use the same services, so the result and the query parameters are the same for both version.
 
 ## Plan of the presentation
 
@@ -29,6 +23,7 @@ I explain with all the details how I build the project and my way of working.
 1. [ERD](#erd)
 2. [Documentation](#documentation)
 3. [Organization](#organization)
+2. [Technologies](#technologies)
 4. [Development](#development)
 5. [Seeding](#seeding)
 6. [Testing](#testing)
@@ -60,7 +55,7 @@ http://localhost:5000/documentation
 
 The jsdoc can be generated locally with the following command :
 
-```
+```bash
 npm run build:docs
 ```
 
@@ -76,7 +71,7 @@ http://localhost:5000/api/graphql
 
 Since it's a graphql, anyone can generate the documentation by introspection. I suggest to use this tool `2fd/graphdoc` with the following commands :
 
-```
+```bash
 npm install -g @2fd/graphdoc
 graphdoc -e http://localhost:5000/api/graphql -o ./doc/schema
 ```
@@ -87,24 +82,24 @@ A html doc will be then found inside the directory **/doc/schema**.
 
 #### Organization of the global folder
 
-| Folder's Name | Description of the folder                               |
-| :------------ | :------------------------------------------------------ |
-| documentation | Everything related to the documentations                |
-| env           | Regroup the global constant of the app                  |
-| seeding       | Regroup the seed of the app for populating the database |
-| src           | Regroup the source code                                 |
-| test          | Regroup the test                                        |
+| Folder's Name  | Description of the folder                               |
+| :------------- | :------------------------------------------------------ |
+| `documentation`| Everything related to the documentations                |
+| `env`          | Regroup the global constant of the app                  |
+| `seeding`      | Regroup the seed of the app for populating the database |
+| `src`          | Regroup the source code                                 |
+| `test`         | Regroup the test                                        |
 
 #### Organization of the src folder
 
 | Folder's Name | Description of the folder                               |
 | :------------ | :------------------------------------------------------ |
-| dbs           | Regroup the direct call to the database                 |
-| libs          | Regroup the utils and global functions                  |
-| models        | Regroup the models                                      |
-| routes        | Regroup the routes if needed                            |
-| services      | Regroup the services of the app                         |
-| types         | Regroup the types for graphQL                           |
+| `dbs`         | Regroup the direct call to the database                 |
+| `libs`        | Regroup the utils and global functions                  |
+| `models`      | Regroup the models                                      |
+| `routes`      | Regroup the routes if needed                            |
+| `services`    | Regroup the services of the app                         |
+| `types`       | Regroup the types for graphQL                           |
 
 ## Development
 
@@ -114,8 +109,6 @@ A html doc will be then found inside the directory **/doc/schema**.
 * **@admin-bro/mongoose**: A middleware for connecting mongoose with admin bro. I use it for connecting admin bro to the mongoose schema.
 * **admin-bro**: AdminBro is an admin interface for managing/editing the information in the database. It removes the need of building an admin interface. I use it because I cannot rely on someone else for building an admin interface if I work with a frontend.
 * **apollo-server-express**: Apollo serves as an abstraction layer that decouples services and apps so that each can be developed independently of the other, in any language and on any platform. I use it for managing a graphQl.
-* **basic-auth**: Basic Auth is used for protecting url and ressource by a htaccess authentication. I use it for protecting the admin bro route.
-* **bcrypt**: A library for hashing information. I use it for hashing the password.
 * **dotenv**: Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. I use it for creating an environment for the prod, stage, dev and local development.
 * **email-validator**: Checking an email is a simple task but it can be tricky to check all the possibilities given by a particular RFC. I rely on this small package for checking the validity of an email.
 * **express**: xpress is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. I use it for managing the routes and the API.
@@ -126,13 +119,10 @@ A html doc will be then found inside the directory **/doc/schema**.
 * **graphql-voyager**: With graphql-voyager you can visually explore your GraphQL API as an interactive graph. This is a great tool when designing or discussing your data model. I use it for letting people see the erd and the documentation behind the API without doing any effort.
 * **helmet**: Helmet helps you secure your Express apps by setting various HTTP headers. I use it for hidding some header and protecting the app against well know weakness of Express.
 * **isomorphic-fetch**: The Fetch API is currently not implemented consistently across browsers. This module will enable you to use fetch in your Node code in a cross-browser compliant fashion. I use it for testing the unit test, I call every endpoint with a fetch as any browser will do.
-* **jsonwebtoken**: JSON Web Token (JWT) is a compact, URL-safe means of representing claims to be transferred between two parties. I use it for creating and managing the Bearer Token.
-* **mailgun-js**: Node.js module for interacting with the Mailgun API. I use it for sending mail with Mailgun.
 * **marked**: Low-level compiler for parsing markdown without caching or blocking for long periods of time. I use it for reading the content of the Readme and passing it to a webpage. That way the README is readable in a browser through an endpoint.
 * **module-alias**: Create aliases of directories and register custom module paths in NodeJS. I use it for avoiding transversal path inside the call, it makes the development way more simpler and cleaner.
 * **mongo-uri-builder**: A zero dependency Node.js module to easily create MongoDB connection strings using configuration objects. I use it for passing the uri to mongodb and making the connection with the express server.
 * **mongoose**: Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. I use it like an ORM and for designing the schema of the app easily.
-* **mustache**: Mustache is a logic-less template syntax. It can be used for HTML, config files, source code - anything. It works by expanding tags in a template using values provided in a hash or object. I use it for parsing tags inside the email template and replacing those tags by a value from the app.
 * **node-cron**: The node-cron module is tiny task scheduler in pure JavaScript for node.js based on GNU crontab. I use it for managing the calls that need to be execute following a schedule.
 * **react**: React is a JavaScript library for creating user interfaces. I use it for creating the user interface for the ERD and documentation.
 * **react-dom**: This package serves as the entry point to the DOM and server renderers for React. I use it for managing the interaction in the dom for the voyager.
@@ -141,13 +131,21 @@ A html doc will be then found inside the directory **/doc/schema**.
 * **coveralls**: Coveralls.io support for Node.js. I use it for linking the app to coveralls website and getting the percentage of coverage of the test.
 * **eslint**: ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exceptions. I use it for fixing the style of the app.
 * **faker**: Generate massive amounts of fake data in the browser and node.js I use it inside the test for generating random data, it make the test more powerful.
-* **heml**: HEML is an open source markup language for building responsive email. I use it for building the email template and making responsive email.
 * **husky**: Husky is a modern native Git hooks. I use it for restricting the commit to the interesting one and for forcing the test to be run before merging anything.
 * **jsdoc**: An API documentation generator for JavaScript. I use it for generating the documentation using the comments in the code.
 * **mongo-seeding**: The ultimate solution for populating your MongoDB database. I use it for populating the test database and also for populating the server at first installation.
 * **npx**: Executes <command> either from a local node_modules/.bin, or from a central cache, installing any packages needed in order for <command> to run. I use it for running package from my local node module directory such as esLint.
 * **nyc**: Istanbul's state of the art command line interface. I use it for creating the report for the coverall and making it available in the browser.
 
+## Technologies
+
+The server is using the library `Express` but it can be switch easily in the **server.js** file for Fastify or Restify. The server is linked to the library `Apollo-server` for managing the data with `GraphQL`. The database is handle by `MongoDB` and can also be easily switch in **database.js**. The data come from the seed and are populating the db at each restart of the server.
+
+The models are found in the folder **models**. Their schema are described with `mongoose` and also typed for using `GraphQL`.
+
+The continuous integration is handled with `Travis` and the coverage is checked by `Coveralls` and `Codeclimate` for checking the level of maintainability of the code. Finally, I use `Ava` for making the test cases. For fixing the style, I use `Eslint`.
+
+Before committing, `Husky` will force the tests to be run and will validate or not the new push.
 
 #### Environment variables
 
@@ -155,13 +153,13 @@ The environment variable are not present in the project but can be found in the 
 
 For encrypting the variables, you will need Travis :
 
-```
+```bash
 gem install travis
 ```
 
 Then you will need to connect your GitHub account to it. I recommend using GitHub-token.
 
-```
+```bash
 travis login --github-token my_token
 ```
 
@@ -183,7 +181,7 @@ travis encrypt-file ./xxx_filename --add
 
 The email are build with `heml` and `Mustache`. They can be build easily with the following command :
 
-```
+```bash
 npm run build:emails
 ```
 
@@ -204,7 +202,7 @@ The mutations, directives and queries are dynamically added to the graph. For ad
 
 For having a database with some data from the start, you can seed it with a single command. It will fill up all the db with dummy data using `mongo-seed`.
 
-```
+```bash
 npm run seed
 ```
 
@@ -212,7 +210,7 @@ npm run seed
 
 For automatic tests, I use `Ava`. All the tests can be run with a single command. The command will also provide details on the coverage.
 
-```
+```bash
 npm run test
 ```
 
@@ -220,7 +218,7 @@ npm run test
 
 For connecting to the API during the development, I use `localtunnel` for exposing the server through a domain format. The server works on the port 5000, so I use the following commands :
 
-```
+```bash
 npm install -g localtunnel
 lt --port 5000 --subdomain couple-api
 ```
@@ -253,7 +251,7 @@ http://localhost:5000/status
 
 For running the API, a single command is needed. You might want to use the [SSH Tunneling](#ssh-tunneling).
 
-```
+```bash
 npm run start
 ```
 

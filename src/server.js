@@ -9,6 +9,8 @@ const voyagerMiddleware = require('graphql-voyager/middleware')
 const apollo = require('@src/apollo')
 const logger = require('@src/libs/logger')
 const crontab = require('@src/crontab/crontab')
+const swaggerUi = require('swagger-ui-express')
+const swaggerJsdoc = require('swagger-jsdoc')
 
 module.exports = {
   /**
@@ -41,6 +43,29 @@ module.exports = {
     server.use(require('express-status-monitor')())
   },
   /**
+  * Allow us to use the middleware for the documentation with swagger
+  * @param {Express} server The server allowed to use the swagger endpoint
+  **/
+  register_swagger: (server) => {
+    const options = {
+      definition: {
+        openapi: '3.0.0',
+        info: {
+          title: 'Hello World',
+          version: '1.0.0'
+        },
+        servers: [{
+          url: 'http://' + process.env.HOST + ':' + process.env.PORT
+        }]
+      },
+      apis: ['./src/routes*.js']
+    }
+
+    const openapiSpecification = swaggerJsdoc(options)
+
+    server.use('/api', swaggerUi.serve, swaggerUi.setup(openapiSpecification))
+  },
+  /**
   * Allow us to use the middleware helmet for hidding some headers
   * @param {Express} server The server allowed to use helmet
   **/
@@ -58,6 +83,7 @@ module.exports = {
     const server = module.exports.create_server()
     crontab.start()
 
+    module.exports.register_swagger(server)
     module.exports.register_graphql(server)
     module.exports.register_voyager(server)
     module.exports.register_monitor(server)
