@@ -41,7 +41,6 @@ module.exports = {
     const joint = utils_filter.handle_joint_argument(args.joint)
     const title = utils_filter.handle_match_argument(args.title)
     const content = utils_filter.handle_match_argument(args.content)
-    console.log(args, title)
     return dbs.get_posts({ limit, skip, sort, order, joint, title, content })
   },
   /**

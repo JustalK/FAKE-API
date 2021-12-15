@@ -16,9 +16,8 @@ module.exports = {
     order && params.push(`order="${order}"`)
     joint && params.push(`joint="${joint}"`)
     title && params.push(`title=${title}`)
-    content && params.push(`content="${content}"`)
+    content && params.push(`content=${content}`)
 
-    console.log(params)
     const queries = params.length > 0 ? `?${params.join('&')}` : ''
     return m_utils.get_rest(url + queries)
   }
