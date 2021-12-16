@@ -13,10 +13,11 @@ const marked = require('marked')
  * @swagger
  * /:
  *   get:
- *     description: Welcome to swagger-jsdoc!
+ *     summary: "Testing the status of the api"
+ *     description: "If this call work, it means the api is running properly"
  *     responses:
  *       200:
- *         description: Returns a mysterious string.
+ *         description: Returns the status of the api
  */
 router.get('/', async (request, response) => {
   response.send({
