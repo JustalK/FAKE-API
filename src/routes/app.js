@@ -14,6 +14,8 @@ const cors = require('cors')
  * @swagger
  * /:
  *   get:
+ *     tags:
+ *     - "Utils"
  *     summary: "Testing the status of the api"
  *     description: "If this call work, it means the api is running properly"
  *     responses:
@@ -26,7 +28,18 @@ router.get('/', cors(), async (request, response) => {
   })
 })
 
-// Add a documentation endpoint coming from the README
+/**
+ * @swagger
+ * /documentation:
+ *   get:
+ *     tags:
+ *     - "Utils"
+ *     summary: "Documentation endpoint for the developer"
+ *     description: "Give an endpoint for showing the readme"
+ *     responses:
+ *       200:
+ *         description: Returns the html code for the page
+ */
 router.get('/documentation', cors(), function (request, response) {
   const path = 'README.md'
   const file = fs.readFileSync(path, 'utf8')
