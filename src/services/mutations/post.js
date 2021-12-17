@@ -33,7 +33,6 @@ module.exports = {
   **/
   delete_post_by_id: async (_, args) => {
     const rsl = await utils_post.delete_post_by_id(args.post_id)
-    const { deletedCount } = rsl
-    return deletedCount === 1
+    return rsl !== null
   }
 }

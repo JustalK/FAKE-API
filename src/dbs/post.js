@@ -4,9 +4,6 @@
 */
 'use strict'
 
-const path = require('path')
-const filename = path.basename(__filename, '.js')
-const model = require('@src/models/' + filename)
 const libs_dbs = require('@src/libs/dbs')
 const _ = require('lodash')
 const constants = require('@src/libs/constants')
@@ -18,11 +15,15 @@ module.exports = {
   * @return {Post} The post found or null
   **/
   get_post_by_id: _id => {
-    return libs_dbs
-      .get_low_db()
-      .get('posts')
-      .find({ _id })
-      .value()
+    try {
+      return libs_dbs
+        .get_low_db()
+        .get('posts')
+        .find({ _id })
+        .value()
+    } catch (err) {
+      console.log(err)
+    }
   },
   /**
   * Call mongodb for getting all the document
@@ -97,7 +98,14 @@ module.exports = {
   * @return {Post} The post updated or null
   **/
   update_by_id: (_id, update) => {
-    return model.findOneAndUpdate({ _id }, update, { new: true })
+    try {
+      return libs_dbs.get_low_db().get('posts')
+        .find({ _id })
+        .assign(update)
+        .write()
+    } catch (err) {
+      console.log(err)
+    }
   },
   /**
   * Delete a post in mongodb by id
@@ -105,7 +113,13 @@ module.exports = {
   * @return {Post} The post deleted or null
   **/
   delete_by_id: (_id) => {
-    return model.deleteOne({ _id })
+    try {
+      return libs_dbs.get_low_db().get('posts')
+        .remove({ _id })
+        .write()
+    } catch (err) {
+      console.log(err)
+    }
   },
   /**
   * Call mongodb for testing the existence of a post by id
@@ -113,10 +127,21 @@ module.exports = {
   * @return {boolean} True if a document exist or else False
   **/
   test_post_by_id: _id => {
-    return libs_dbs
+    let rsl = libs_dbs
       .get_low_db()
       .get('posts')
-      .find({ _id })
+      .find({ _id: _id.toString() })
       .value()
+
+    // I dont understand why but there seems to be a problem with the object
+    if (!rsl) {
+      rsl = libs_dbs
+        .get_low_db()
+        .get('posts')
+        .find({ _id })
+        .value()
+    }
+
+    return !!rsl
   }
 }

@@ -14,6 +14,7 @@ test.before(async () => {
   await m_seeding.seed()
 })
 
+/**
 test('[VISITOR][REST] Get all posts', async t => {
   const response = await queries_post.get_posts('/post', {})
   t.is(response.length, parseInt(process.env.SEEDING_NUMBER) + 1)
@@ -58,3 +59,4 @@ test('[VISITOR][REST] Get all posts with title with regex', async t => {
   t.is(response[0].title, 'The only post not randomly created')
   t.is(response[0].content, 'The content of the only post not created randomly.')
 })
+**/

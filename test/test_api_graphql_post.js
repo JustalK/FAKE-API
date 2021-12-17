@@ -123,3 +123,38 @@ test('[VISITOR][GRAPHQL] Get all posts sorted with a key that does not exist', a
   const response = await queries_post.get_posts({ sort: 'try' })
   t.is(response.errors[0].message, 'The key (try) is not available for sorting')
 })
+
+test('[VISITOR][GRAPHQL] Add a post by args', async t => {
+  const response = await queries_post.add_post_by_args({ title: 'My test title', content: 'My test content' })
+  t.is(response.add_post_by_args.title, 'My test title')
+  t.is(response.add_post_by_args.content, 'My test content')
+})
+
+test('[VISITOR][GRAPHQL] Add a post by args with missing content arg', async t => {
+  const response = await queries_post.add_post_by_args({ title: 'My test title' })
+  t.is(response.errors[0].message, 'Field "add_post_by_args" argument "content" of type "String!" is required, but it was not provided.')
+})
+
+test('[VISITOR][GRAPHQL] Add a post by args with missing title arg', async t => {
+  const response = await queries_post.add_post_by_args({ content: 'My test content' })
+  t.is(response.errors[0].message, 'Field "add_post_by_args" argument "title" of type "String!" is required, but it was not provided.')
+})
+
+test('[VISITOR][GRAPHQL] Add a post by args with wrong title type', async t => {
+  const response = await queries_post.error_add_post_by_args({ title: 12, content: 'My test content' })
+  t.is(response.errors[0].message, 'String cannot represent a non string value: 12')
+})
+
+test('[VISITOR][GRAPHQL] Update a post', async t => {
+  const response = await queries_post.update_post_by_id('5fd5b58efbc2f7a33c2aa001', { title: 'Updated title', content: 'The updated content', deleted: false })
+  t.is(response.update_post_by_id.title, 'Updated title')
+  t.is(response.update_post_by_id.content, 'The updated content')
+  t.is(response.update_post_by_id.deleted, false)
+})
+
+test('[VISITOR][GRAPHQL] Delete a post', async t => {
+  const response = await queries_post.delete_post_by_id('5fd5b58efbc2f7a33c2aa001')
+  t.is(response.delete_post_by_id, true)
+  const response_deleted = await queries_post.delete_post_by_id('5fd5b58efbc2f7a33c2aa001')
+  t.is(response_deleted.errors[0].message, 'The object with id(5fd5b58efbc2f7a33c2aa001) does not exist.')
+})
