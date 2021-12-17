@@ -46,4 +46,17 @@ router.get('/documentation', cors(), function (request, response) {
   response.send(marked(file.toString()))
 })
 
+/**
+ * @swagger
+ * /api/graphql:
+ *   get:
+ *     tags:
+ *     - "Utils"
+ *     summary: "Redirect you to the graphql documentation"
+ *     description: "This is the second way to call the api"
+ *     responses:
+ *       200:
+ *         description: Returns the html code for the graphql page
+ */
+
 module.exports = router
