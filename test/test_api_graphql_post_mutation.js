@@ -11,11 +11,11 @@ const m_seeding = require('@seeding/seeder')
 
 test.before(async () => {
   await m.start()
-  await m_seeding.clean()
-  await m_seeding.seed()
+  m_seeding.clean()
+  m_seeding.seed()
 })
 
-test.only('[VISITOR][GRAPHQL] Add a post by args', async t => {
+test('[VISITOR][GRAPHQL] Add a post by args', async t => {
   const response = await queries_post.add_post_by_args({ title: 'My test title', content: 'My test content' })
   t.is(response.add_post_by_args.title, 'My test title')
   t.is(response.add_post_by_args.content, 'My test content')

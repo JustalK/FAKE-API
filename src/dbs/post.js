@@ -8,6 +8,8 @@ const path = require('path')
 const filename = path.basename(__filename, '.js')
 const model = require('@src/models/' + filename)
 const libs_dbs = require('@src/libs/dbs')
+const _ = require('lodash')
+const constants = require('@src/libs/constants')
 
 module.exports = {
   /**
@@ -16,7 +18,11 @@ module.exports = {
   * @return {Post} The post found or null
   **/
   get_post_by_id: _id => {
-    return model.findOne({ _id })
+    return libs_dbs
+      .get_low_db()
+      .get('posts')
+      .find({ _id })
+      .value()
   },
   /**
   * Call mongodb for getting all the document
@@ -30,6 +36,7 @@ module.exports = {
   * @return {[Post]} The posts restricted by the filters
   **/
   get_posts: ({ limit, skip, sort, order, joint, title, content }) => {
+    /**
     const matches = []
 
     if (title !== null) {
@@ -42,9 +49,43 @@ module.exports = {
 
     const aggregation = libs_dbs.handle_classic_filters({ matches, skip, order, sort, limit, joint })
     return model.aggregate(aggregation)
+    **/
+    try {
+      let rsl = libs_dbs
+        .get_low_db()
+        .get('posts')
+
+      rsl = rsl.value()
+
+      if (joint === constants.joint_and) {
+        if (title) {
+          rsl = rsl.filter(post => title.test(post.title))
+        }
+
+        if (content) {
+          rsl = rsl.filter(post => content.test(post.content))
+        }
+      } else if (joint === constants.joint_or) {
+        rsl = rsl.filter(post => content.test(post.content) || title.test(post.title))
+      }
+
+      if (order) {
+        rsl = _.orderBy(rsl, [sort || '_id'], [order])
+      }
+
+      if (limit || skip) {
+        const max_limit = limit || 10000
+        rsl = rsl.slice(skip, max_limit + skip)
+      }
+
+      return rsl
+    } catch (err) {
+      console.log(err)
+    }
   },
   /**
   * Call mongodb for adding a post to the database
+  * @param {string} _id The id of the post
   * @param {string} title The title of the post
   * @param {string} content The content of the post
   * @return {Post} The post added with the id
@@ -86,6 +127,10 @@ module.exports = {
   * @return {boolean} True if a document exist or else False
   **/
   test_post_by_id: _id => {
-    return model.exists({ _id })
+    return libs_dbs
+      .get_low_db()
+      .get('posts')
+      .find({ _id })
+      .value()
   }
 }

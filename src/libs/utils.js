@@ -12,5 +12,15 @@ module.exports = {
   **/
   mode: node_env => {
     return node_env !== undefined ? node_env : 'development'
+  },
+  /**
+  * Wait x ms before moving on
+  * @param {number} ms The number of millisecond
+  * @return {Promise<boolean>} A promise
+  **/
+  sleep: (ms) => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms)
+    })
   }
 }

@@ -22,7 +22,7 @@ module.exports = {
   /**
   * Seed the database with the informations in data
   **/
-  seed: async () => {
-    await libs_dbs.get_low_db().defaults({ posts: datas }).write()
+  seed: () => {
+    libs_dbs.get_low_db().defaults({ posts: datas }).write()
   }
 }

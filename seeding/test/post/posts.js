@@ -9,7 +9,7 @@ const mongoose = require('mongoose')
 **/
 const creating_fake_posts = (number_post) => {
   return Array.from({ length: number_post }, () => ({
-    id: mongoose.Types.ObjectId(),
+    _id: mongoose.Types.ObjectId(),
     title: faker.lorem.words(),
     content: faker.lorem.paragraphs(),
     deleted: faker.datatype.boolean()
@@ -19,7 +19,7 @@ const creating_fake_posts = (number_post) => {
 module.exports = [
   ...creating_fake_posts(process.env.SEEDING_NUMBER || 100),
   {
-    id: mongoose.Types.ObjectId('5fd5b58efbc2f7a33c2aa001'),
+    _id: mongoose.Types.ObjectId('5fd5b58efbc2f7a33c2aa001'),
     title: 'The only post not randomly created',
     content: 'The content of the only post not created randomly.',
     deleted: false

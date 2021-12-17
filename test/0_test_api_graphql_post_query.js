@@ -12,7 +12,8 @@ const m_seeding = require('@seeding/seeder')
 
 test.before(async () => {
   await m.start()
-  await m_seeding.seed()
+  m_seeding.clean()
+  m_seeding.seed()
 })
 
 test('[VISITOR][GRAPHQL] Get a post by id', async t => {
