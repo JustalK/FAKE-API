@@ -8,6 +8,7 @@ const express = require('express')
 const router = express.Router()
 const fs = require('fs')
 const marked = require('marked')
+const cors = require('cors')
 
 /**
  * @swagger
@@ -19,14 +20,14 @@ const marked = require('marked')
  *       200:
  *         description: Returns the status of the api
  */
-router.get('/', async (request, response) => {
+router.get('/', cors(), async (request, response) => {
   response.send({
     status: 'working'
   })
 })
 
 // Add a documentation endpoint coming from the README
-router.get('/documentation', function (request, response) {
+router.get('/documentation', cors(), function (request, response) {
   const path = 'README.md'
   const file = fs.readFileSync(path, 'utf8')
   response.send(marked(file.toString()))

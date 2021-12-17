@@ -11,6 +11,7 @@ const logger = require('@src/libs/logger')
 const crontab = require('@src/crontab/crontab')
 const swaggerUi = require('swagger-ui-express')
 const swaggerJsdoc = require('swagger-jsdoc')
+const cors = require('cors')
 
 module.exports = {
   /**
@@ -73,6 +74,13 @@ module.exports = {
     server.use(require('helmet')())
   },
   /**
+  * Allow us to use the cors middleware
+  * @param {Express} server The server allowed to use helmet
+  **/
+  register_cors: (server) => {
+    server.options('*', cors())
+  },
+  /**
   * Start the server using the parameter
   * @param {string} name The name of the server
   * @param {string} host The host of the server
@@ -83,6 +91,7 @@ module.exports = {
     const server = module.exports.create_server()
     crontab.start()
 
+    module.exports.register_cors(server)
     module.exports.register_swagger(server)
     module.exports.register_graphql(server)
     module.exports.register_voyager(server)
