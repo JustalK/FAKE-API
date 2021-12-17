@@ -36,20 +36,6 @@ module.exports = {
   * @return {[Post]} The posts restricted by the filters
   **/
   get_posts: ({ limit, skip, sort, order, joint, title, content }) => {
-    /**
-    const matches = []
-
-    if (title !== null) {
-      matches.push({ title: { $regex: title } })
-    }
-
-    if (content !== null) {
-      matches.push({ content: { $regex: content } })
-    }
-
-    const aggregation = libs_dbs.handle_classic_filters({ matches, skip, order, sort, limit, joint })
-    return model.aggregate(aggregation)
-    **/
     try {
       let rsl = libs_dbs
         .get_low_db()
