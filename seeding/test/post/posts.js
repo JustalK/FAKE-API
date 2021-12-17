@@ -8,7 +8,8 @@ const mongoose = require('mongoose')
 * @return {[Post]} Return the random post created
 **/
 const creating_fake_posts = (number_post) => {
-  return Array.from({ length: number_post }, () => ({
+  return Array.from({ length: number_post }, (_, index) => ({
+    id: index,
     title: faker.lorem.words(),
     content: faker.lorem.paragraphs(),
     deleted: faker.datatype.boolean()
@@ -16,7 +17,7 @@ const creating_fake_posts = (number_post) => {
 }
 
 module.exports = [
-  ...creating_fake_posts(process.env.SEEDING_NUMBER),
+  ...creating_fake_posts(process.env.SEEDING_NUMBER || 100),
   {
     id: mongoose.Types.ObjectId('5fd5b58efbc2f7a33c2aa001'),
     title: 'The only post not randomly created',

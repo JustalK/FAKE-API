@@ -50,6 +50,9 @@ module.exports = {
   * @return {Post} The post added with the id
   **/
   insert: ({ title, content }) => {
+    libs_dbs.get_low_db().get('posts')
+      .push({ title, content })
+      .write()
     return model.create({ title, content })
   },
   /**

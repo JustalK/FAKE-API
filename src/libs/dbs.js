@@ -5,6 +5,11 @@
 'use strict'
 
 const constants = require('@src/libs/constants')
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+
+const adapter = new FileSync('db.json')
+const db = low(adapter)
 
 module.exports = {
   /**
@@ -34,5 +39,11 @@ module.exports = {
     }
 
     return aggregation
+  },
+  /**
+  * Get the db location and file
+  **/
+  get_low_db: () => {
+    return db
   }
 }
