@@ -50,7 +50,8 @@ module.exports = {
   * @return {Post} The post added with the id
   **/
   add_post_by_args: async ({ title, content }) => {
-    return await dbs.insert({ title, content })
+    const tmp_post = new Post({ title, content })
+    return await dbs.insert(tmp_post)
   },
   /**
   * Update a post

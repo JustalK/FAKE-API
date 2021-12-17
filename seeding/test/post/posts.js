@@ -8,8 +8,8 @@ const mongoose = require('mongoose')
 * @return {[Post]} Return the random post created
 **/
 const creating_fake_posts = (number_post) => {
-  return Array.from({ length: number_post }, (_, index) => ({
-    id: index,
+  return Array.from({ length: number_post }, () => ({
+    id: mongoose.Types.ObjectId(),
     title: faker.lorem.words(),
     content: faker.lorem.paragraphs(),
     deleted: faker.datatype.boolean()

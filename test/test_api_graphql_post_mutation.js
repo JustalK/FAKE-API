@@ -11,6 +11,7 @@ const m_seeding = require('@seeding/seeder')
 
 test.before(async () => {
   await m.start()
+  await m_seeding.clean()
   await m_seeding.seed()
 })
 

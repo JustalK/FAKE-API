@@ -49,11 +49,19 @@ module.exports = {
   * @param {string} content The content of the post
   * @return {Post} The post added with the id
   **/
-  insert: ({ title, content }) => {
-    libs_dbs.get_low_db().get('posts')
-      .push({ title, content })
-      .write()
-    return model.create({ title, content })
+  insert: ({ _id, title, content }) => {
+    try {
+      libs_dbs.get_low_db().get('posts')
+        .push({ _id, title, content })
+        .write()
+      return {
+        _id,
+        title,
+        content
+      }
+    } catch (err) {
+      console.log(err)
+    }
   },
   /**
   * Update a post in mongodb respecting the condtion
