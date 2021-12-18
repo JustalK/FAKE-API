@@ -56,7 +56,7 @@ module.exports = {
           version: '1.0.0'
         },
         servers: [{
-          url: process.env.PROTOCOL + '://' + process.env.HOST + ':' + process.env.PORT
+          url: process.env.HEROKU_PROTOCOL + '://' + process.env.HEROKU_HOST + ':' + process.env.HEROKU_PORT
         }]
       },
       apis: ['src/routes/*.js']
