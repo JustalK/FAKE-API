@@ -1,11 +1,13 @@
 # TEST-API
 
+```
+REST: https://labo-test-api.herokuapp.com/api/rest
+GRAPHQL: https://labo-test-api.herokuapp.com/api/graphql
+```
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/55bbff204f62104c7c8d/maintainability)](https://codeclimate.com/github/JustalK/SERVER-API/maintainability)
 
-This project is a simple fake API. For testing purpose on my different projects, I was using most of the time one of the API below :
-
-- https://randomuser.me/
-- https://jsonplaceholder.typicode.com/
+This project is a simple fake API. For testing purpose on my different projects, I was using randomuser or jsonplaceholder.
 
 Those projects are quite nice but they are missing some features. The most obvious one are the filters.
 I needed for few projects an api with some limit and skip filter for creating a pagination. Since the API was not done and I was handling only the Frontend, I needed a bunch of fake data for already coding the pages.
@@ -27,14 +29,6 @@ I explain with all the details how I build the project and my way of working.
 7. [Monitoring](#monitoring)
 8. [Security](#security)
 9. [Running](#running)
-
-## ERD
-
-`Graphql-voyager` has been added as a middleware so you can visualize the ERD on the following endpoint : `/erd`
-
-```
-http://localhost:5000/erd
-```
 
 ## Documentation
 
