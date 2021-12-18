@@ -27,11 +27,9 @@ I explain with all the details how I build the project and my way of working.
 4. [Development](#development)
 5. [Seeding](#seeding)
 6. [Testing](#testing)
-7. [Admin](#admin)
-8. [Monitoring](#monitoring)
-9. [Security](#security)
-10. [Running](#running)
-11. [Deployment](#deployment)
+7. [Monitoring](#monitoring)
+8. [Security](#security)
+9. [Running](#running)
 
 ## ERD
 
@@ -43,12 +41,38 @@ http://localhost:5000/erd
 
 ## Documentation
 
-#### Server documentation
+#### Readme documentation
 
 The documentation of the server can be access at this endpoint. It gives information about the server, the tools and how to use the API. Open a browser and go to the following URL :
 
 ```
-http://localhost:5000/documentation
+WEB: https://labo-test-api.herokuapp.com/documentation
+LOCAL: http://localhost:5000/documentation
+```
+
+#### Api rest documentation
+
+The documentation for the rest version of the API :
+
+```
+WEB: https://labo-test-api.herokuapp.com/api/rest
+LOCAL: http://localhost:5000/api/rest
+```
+
+#### Api graphql documentation
+
+The documentation for the graphql version of the API :
+
+```
+WEB: https://labo-test-api.herokuapp.com/api/graphql
+LOCAL: http://localhost:5000/api/graphql
+```
+
+You can also see the graph with `graphql-voyager`
+
+```
+WEB: https://labo-test-api.herokuapp.com/erd
+LOCAL: http://localhost:5000/erd
 ```
 
 #### Code documentation
@@ -57,14 +81,6 @@ The jsdoc can be generated locally with the following command :
 
 ```bash
 npm run build:docs
-```
-
-#### Online API documentation
-
-The playground of the apollo server is activated, so the documentation and the json format can be access at the endpoint of the api. Open a browser and browse to the following URL :
-
-```
-http://localhost:5000/api/graphql
 ```
 
 #### Local API documentation
@@ -97,7 +113,7 @@ A html doc will be then found inside the directory **/doc/schema**.
 | `dbs`         | Regroup the direct call to the database                 |
 | `libs`        | Regroup the utils and global functions                  |
 | `models`      | Regroup the models                                      |
-| `routes`      | Regroup the routes if needed                            |
+| `routes`      | Regroup the routes for the rest API                     |
 | `services`    | Regroup the services of the app                         |
 | `types`       | Regroup the types for graphQL                           |
 
@@ -105,12 +121,8 @@ A html doc will be then found inside the directory **/doc/schema**.
 
 #### Package explanation
 
-* **@admin-bro/express**: A middleware for connecting express with admin-bro. I use it for creating the route of the admin bro.
-* **@admin-bro/mongoose**: A middleware for connecting mongoose with admin bro. I use it for connecting admin bro to the mongoose schema.
-* **admin-bro**: AdminBro is an admin interface for managing/editing the information in the database. It removes the need of building an admin interface. I use it because I cannot rely on someone else for building an admin interface if I work with a frontend.
 * **apollo-server-express**: Apollo serves as an abstraction layer that decouples services and apps so that each can be developed independently of the other, in any language and on any platform. I use it for managing a graphQl.
 * **dotenv**: Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. I use it for creating an environment for the prod, stage, dev and local development.
-* **email-validator**: Checking an email is a simple task but it can be tricky to check all the possibilities given by a particular RFC. I rely on this small package for checking the validity of an email.
 * **express**: xpress is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. I use it for managing the routes and the API.
 * **express-session**: A middleware for managing the session through express. I use it for creating the account of the app.
 * **express-status-monitor**: Simple, self-hosted module based on Socket.io and Chart.js to report realtime server metrics for Express-based node servers. I use this for checking the status of the server without connecting to aws.
@@ -121,7 +133,6 @@ A html doc will be then found inside the directory **/doc/schema**.
 * **isomorphic-fetch**: The Fetch API is currently not implemented consistently across browsers. This module will enable you to use fetch in your Node code in a cross-browser compliant fashion. I use it for testing the unit test, I call every endpoint with a fetch as any browser will do.
 * **marked**: Low-level compiler for parsing markdown without caching or blocking for long periods of time. I use it for reading the content of the Readme and passing it to a webpage. That way the README is readable in a browser through an endpoint.
 * **module-alias**: Create aliases of directories and register custom module paths in NodeJS. I use it for avoiding transversal path inside the call, it makes the development way more simpler and cleaner.
-* **mongo-uri-builder**: A zero dependency Node.js module to easily create MongoDB connection strings using configuration objects. I use it for passing the uri to mongodb and making the connection with the express server.
 * **mongoose**: Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. I use it like an ORM and for designing the schema of the app easily.
 * **node-cron**: The node-cron module is tiny task scheduler in pure JavaScript for node.js based on GNU crontab. I use it for managing the calls that need to be execute following a schedule.
 * **react**: React is a JavaScript library for creating user interfaces. I use it for creating the user interface for the ERD and documentation.
@@ -133,13 +144,14 @@ A html doc will be then found inside the directory **/doc/schema**.
 * **faker**: Generate massive amounts of fake data in the browser and node.js I use it inside the test for generating random data, it make the test more powerful.
 * **husky**: Husky is a modern native Git hooks. I use it for restricting the commit to the interesting one and for forcing the test to be run before merging anything.
 * **jsdoc**: An API documentation generator for JavaScript. I use it for generating the documentation using the comments in the code.
-* **mongo-seeding**: The ultimate solution for populating your MongoDB database. I use it for populating the test database and also for populating the server at first installation.
 * **npx**: Executes <command> either from a local node_modules/.bin, or from a central cache, installing any packages needed in order for <command> to run. I use it for running package from my local node module directory such as esLint.
 * **nyc**: Istanbul's state of the art command line interface. I use it for creating the report for the coverall and making it available in the browser.
+* **lowdb**: For managing the database in a json file
+* **cors**: For managing the cors on the api REST
 
 ## Technologies
 
-The server is using the library `Express` but it can be switch easily in the **server.js** file for Fastify or Restify. The server is linked to the library `Apollo-server` for managing the data with `GraphQL`. The database is handle by `MongoDB` and can also be easily switch in **database.js**. The data come from the seed and are populating the db at each restart of the server.
+The server is using the library `Express` but it can be switch easily in the **server.js** file for Fastify or Restify. The server is linked to the library `Apollo-server` for managing the data with `GraphQL`. The database is handle by `lowdb` and can also be easily switch in **database.js**. The data come from the seed and are populating the db at each restart of the server.
 
 The models are found in the folder **models**. Their schema are described with `mongoose` and also typed for using `GraphQL`.
 
@@ -147,60 +159,13 @@ The continuous integration is handled with `Travis` and the coverage is checked 
 
 Before committing, `Husky` will force the tests to be run and will validate or not the new push.
 
-#### Environment variables
-
-The environment variable are not present in the project but can be found in the `travis.yaml`. Most of them are visible but some are encrypted for Travis to perform his tests.
-
-For encrypting the variables, you will need Travis :
-
-```bash
-gem install travis
-```
-
-Then you will need to connect your GitHub account to it. I recommend using GitHub-token.
-
-```bash
-travis login --github-token my_token
-```
-
-Where **my_token** is the token you will have generated in `https://github.com/settings/tokens`
-
-For encrypting a value, you just need to use the following command :
-
-```
-travis encrypt KEY="value"
-```
-
-or for an entire file :
-
-```
-travis encrypt-file ./xxx_filename --add
-```
-
-#### Build email
-
-The email are build with `heml` and `Mustache`. They can be build easily with the following command :
-
-```bash
-npm run build:emails
-```
-
-#### Adding new request
-
-The mutations, directives and queries are dynamically added to the graph. For adding a new request, you need to follow the logic under :
-
-- Create a new file in **services** inside the folder **directives**, **mutations** or **queries** depending of your need.
-- Those files will be automatically added by the file **apollo.js**.
-- Add the new request into the directives, mutations or queries types inside the folder **types**.
-- Depedning of your need you might need to create a file inside the **dbs** folder.
-
 #### Pre-commit
 
 `Husky` has been installed and will prevent to push any code that break the project.
 
 ## Seeding
 
-For having a database with some data from the start, you can seed it with a single command. It will fill up all the db with dummy data using `mongo-seed`.
+For having a database with some data from the start, you can seed it with a single command. It will fill up all the json file with dummy data.
 
 ```bash
 npm run seed
@@ -223,16 +188,6 @@ npm install -g localtunnel
 lt --port 5000 --subdomain couple-api
 ```
 
-## Admin
-
-The server have a version of `AdminBro` for managing some of the content. Open a browser and go to the following URL :
-
-```
-http://localhost:5000/admin
-```
-
-**WARNING** : At February 06 2020, the AdminBro in production create a Teaser error with infinite call. The trick is to modify the `env` production or to force the minify to false in the source code.
-
 ## Monitoring
 
 The monitoring is enable by default and can be viewed live on the endpoint `/status` :
@@ -254,10 +209,6 @@ For running the API, a single command is needed. You might want to use the [SSH 
 ```bash
 npm run start
 ```
-
-## Deployment
-
-The continuous deployment is made with `Travis` with the informations inside the `.travis.yml`. The SSH key for accessing the server from `Travis` has been encoded and is passed to travis with the file `deploy_key.enc`. The env variable *key* and *iv* needed for decrypting the file has been added to the setting of travis.
 
 ## License
 
