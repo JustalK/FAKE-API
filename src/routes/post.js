@@ -41,7 +41,7 @@ const mongoose = require('mongoose')
  * /post:
  *   get:
  *     tags:
- *     - "Posts"
+ *     - "Post"
  *     summary: "Getting the posts"
  *     description: "The posts received are limited to the parameters chosen"
  *     parameters:
@@ -93,7 +93,7 @@ router.get('/', cors(), async (request, response) => {
  * /post:
  *   post:
  *     tags:
- *     - "Posts"
+ *     - "Post"
  *     summary: "Create a post"
  *     requestBody:
  *       required: true
@@ -112,7 +112,7 @@ router.get('/', cors(), async (request, response) => {
  *                 example: My content
  *     responses:
  *       200:
- *         description: Returns the status of the api
+ *         description: Returns the created post
  *         content:
  *           application/json:
  *             schema:
@@ -128,30 +128,11 @@ router.post('/', cors(), async (request, response) => {
  * /post/:id:
  *   patch:
  *     tags:
- *     - "Posts"
+ *     - "Post"
  *     summary: "Update a post by ID"
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               title:
- *                 type: string
- *                 description: The title of the post
- *                 example: My title
- *               content:
- *                 type: string
- *                 description: The content of the post
- *                 example: My content
- *               deleted:
- *                 type: boolean
- *                 description: True if the post is deleted or else false
- *                 example: false
  *     responses:
  *       200:
- *         description: Returns the status of the api
+ *         description: Returns the updated post
  *         content:
  *           application/json:
  *             schema:
@@ -165,6 +146,21 @@ router.patch('/:id', cors(), async (request, response) => {
   response.send(post)
 })
 
+/**
+ * @swagger
+ * /post/:id:
+ *   delete:
+ *     tags:
+ *     - "Post"
+ *     summary: "Delete a post by ID"
+ *     responses:
+ *       200:
+ *         description: Returns the status of the api
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: boolean
+ */
 router.delete('/:id', cors(), async (request, response) => {
   const id = mongoose.Types.ObjectId(request.params.id)
   const rsl = await utils_post.delete_post_by_id(id)

@@ -23,5 +23,11 @@ module.exports = [
     title: 'The only post not randomly created',
     content: 'The content of the only post not created randomly.',
     deleted: false
+  },
+  {
+    _id: mongoose.Types.ObjectId('5fd5b58efbc2f7a33c2aa002'),
+    title: 'The Rest API Title',
+    content: 'The Rest API Content',
+    deleted: false
   }
 ]

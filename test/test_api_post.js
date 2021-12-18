@@ -39,12 +39,12 @@ test('[VISITOR][GRAPHQL] Trying to get a post by id with an invalid mongoose ID'
 test('[VISITOR][GRAPHQL] Get all posts without filters', async t => {
   const response = await queries_graphql.get_posts({})
   // The random post + the static one
-  t.is(response.get_posts.length, parseInt(process.env.SEEDING_NUMBER) + 1)
+  t.is(response.get_posts.length, parseInt(process.env.SEEDING_NUMBER) + 2)
 })
 
 test('[VISITOR][REST] Get all posts', async t => {
   const response = await queries_rest.get_posts('/post', {})
-  t.is(response.length, parseInt(process.env.SEEDING_NUMBER) + 1)
+  t.is(response.length, parseInt(process.env.SEEDING_NUMBER) + 2)
 })
 
 test('[VISITOR][REST] Get all posts with limit', async t => {
@@ -198,7 +198,7 @@ test('[VISITOR][GRAPHQL] Add a post by args with wrong title type', async t => {
 })
 
 test('[VISITOR][REST] Update a post', async t => {
-  const response = await queries_rest.update_post_by_id('/post', '5fd5b58efbc2f7a33c2aa001', { title: 'Updated title', content: 'The updated content', deleted: false })
+  const response = await queries_rest.update_post_by_id('/post', '5fd5b58efbc2f7a33c2aa002', { title: 'Updated title', content: 'The updated content', deleted: false })
   t.is(response.title, 'Updated title')
   t.is(response.content, 'The updated content')
   t.is(response.deleted, false)
@@ -212,9 +212,9 @@ test('[VISITOR][GRAPHQL] Update a post', async t => {
 })
 
 test('[VISITOR][REST] Delete a post', async t => {
-  const response = await queries_rest.delete_post_by_id('/post', '5fd5b58efbc2f7a33c2aa001')
+  const response = await queries_rest.delete_post_by_id('/post', '5fd5b58efbc2f7a33c2aa002')
   t.is(response, true)
-  const response_deleted = await queries_graphql.delete_post_by_id('5fd5b58efbc2f7a33c2aa001')
+  const response_deleted = await queries_graphql.delete_post_by_id('5fd5b58efbc2f7a33c2aa002')
   console.log(response_deleted)
   t.is(response_deleted.errors[0].message, 'The object with id(5fd5b58efbc2f7a33c2aa001) does not exist.')
 })
