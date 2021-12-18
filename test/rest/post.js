@@ -40,5 +40,13 @@ module.exports = {
   **/
   update_post_by_id: async (url, post_id, { title, content, deleted }) => {
     return m_utils.call_rest(`${url}/${post_id}`, 'PATCH', { title, content, deleted })
+  },
+  /**
+  * Delete a post
+  * @param {String} post_id The id of the post to delete
+  * @return {Post} The post deleted
+  **/
+  delete_post_by_id: async (url, post_id) => {
+    return m_utils.call_rest(`${url}/${post_id}`, 'DELETE')
   }
 }

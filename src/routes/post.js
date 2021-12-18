@@ -8,6 +8,7 @@ const express = require('express')
 const router = express.Router()
 const utils_post = require('@src/services/utils/post')
 const cors = require('cors')
+const mongoose = require('mongoose')
 
 /**
 * @swagger
@@ -162,6 +163,12 @@ router.patch('/:id', cors(), async (request, response) => {
 
   const post = await utils_post.update_post_by_id(_id, update)
   response.send(post)
+})
+
+router.delete('/:id', cors(), async (request, response) => {
+  const id = mongoose.Types.ObjectId(request.params.id)
+  const rsl = await utils_post.delete_post_by_id(id)
+  response.send(rsl !== null)
 })
 
 module.exports = router

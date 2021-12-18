@@ -211,6 +211,14 @@ test('[VISITOR][GRAPHQL] Update a post', async t => {
   t.is(response.update_post_by_id.deleted, false)
 })
 
+test('[VISITOR][REST] Delete a post', async t => {
+  const response = await queries_rest.delete_post_by_id('/post', '5fd5b58efbc2f7a33c2aa001')
+  t.is(response, true)
+  const response_deleted = await queries_graphql.delete_post_by_id('5fd5b58efbc2f7a33c2aa001')
+  console.log(response_deleted)
+  t.is(response_deleted.errors[0].message, 'The object with id(5fd5b58efbc2f7a33c2aa001) does not exist.')
+})
+
 test('[VISITOR][GRAPHQL] Delete a post', async t => {
   const response = await queries_graphql.delete_post_by_id('5fd5b58efbc2f7a33c2aa001')
   t.is(response.delete_post_by_id, true)
