@@ -122,4 +122,46 @@ router.post('/', cors(), async (request, response) => {
   response.send(post)
 })
 
+/**
+ * @swagger
+ * /post/:id:
+ *   patch:
+ *     tags:
+ *     - "Posts"
+ *     summary: "Update a post by ID"
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: The title of the post
+ *                 example: My title
+ *               content:
+ *                 type: string
+ *                 description: The content of the post
+ *                 example: My content
+ *               deleted:
+ *                 type: boolean
+ *                 description: True if the post is deleted or else false
+ *                 example: false
+ *     responses:
+ *       200:
+ *         description: Returns the status of the api
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Post'
+ */
+router.patch('/:id', cors(), async (request, response) => {
+  const _id = request.params.id
+  const update = request.body
+
+  const post = await utils_post.update_post_by_id(_id, update)
+  response.send(post)
+})
+
 module.exports = router
