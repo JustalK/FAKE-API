@@ -1,9 +1,18 @@
 # TEST-API
 
+- **REST**: [https://labo-test-api.herokuapp.com/api/rest](https://labo-test-api.herokuapp.com/api/rest)
+- **GRAPHQL**: [https://labo-test-api.herokuapp.com/api/graphql](https://labo-test-api.herokuapp.com/api/graphql)
 
-**REST**: [https://labo-test-api.herokuapp.com/api/rest](https://labo-test-api.herokuapp.com/api/rest)
-**GRAPHQL**: [https://labo-test-api.herokuapp.com/api/graphql](https://labo-test-api.herokuapp.com/api/graphql)
+**Example**
+<pre>
+ <code>
+  // Get only one post and skip the 2 first
+  <a href="https://labo-test-api.herokuapp.com/post?limit=1&skip=2">https://labo-test-api.herokuapp.com/post?limit=1&skip=2</a>
 
+  // Get all port sorted by title ascending
+  <a href="https://labo-test-api.herokuapp.com/post?order=asc&sort=title">https://labo-test-api.herokuapp.com/post?order=asc&sort=title</a>
+ </code>
+</pre>
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/55bbff204f62104c7c8d/maintainability)](https://codeclimate.com/github/JustalK/SERVER-API/maintainability)
 
@@ -19,16 +28,16 @@ I made the API in two version, one is a `graphql` version, the other one is a `r
 
 I explain with all the details how I build the project and my way of working.
 
-1. [ERD](#erd)
-2. [Documentation](#documentation)
-3. [Organization](#organization)
-2. [Technologies](#technologies)
-4. [Development](#development)
-5. [Seeding](#seeding)
-6. [Testing](#testing)
-7. [Monitoring](#monitoring)
-8. [Security](#security)
-9. [Running](#running)
+- [Documentation](#documentation)
+- [Organization](#organization)
+- [Technologies](#technologies)
+- [Development](#development)
+- [Seeding](#seeding)
+- [Testing](#testing)
+- [Monitoring](#monitoring)
+- [Security](#security)
+- [Running](#running)
+- [Links](#links)
 
 ## Documentation
 
@@ -200,6 +209,12 @@ For running the API, a single command is needed. You might want to use the [SSH 
 ```bash
 npm run start
 ```
+
+## Links
+
+- [https://github.com/typicode/json-server](https://github.com/typicode/json-server)
+- [https://dev.to/kabartolo/how-to-document-an-express-api-with-swagger-ui-and-jsdoc-50do](https://dev.to/kabartolo/how-to-document-an-express-api-with-swagger-ui-and-jsdoc-50do)
+- [https://randomuser.me/](https://randomuser.me/)
 
 ## License
 
