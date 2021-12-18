@@ -48,6 +48,7 @@ module.exports = {
   * @param {Express} server The server allowed to use the swagger endpoint
   **/
   register_swagger: (server) => {
+    const port = process.env.HEROKU_PORT ? `:${process.env.HEROKU_PORT}` : ''
     const options = {
       definition: {
         openapi: '3.0.0',
@@ -56,7 +57,7 @@ module.exports = {
           version: '1.0.0'
         },
         servers: [{
-          url: process.env.HEROKU_PROTOCOL + '://' + process.env.HEROKU_HOST
+          url: process.env.HEROKU_PROTOCOL + '://' + process.env.HEROKU_HOST + port
         }]
       },
       apis: ['src/routes/*.js']
