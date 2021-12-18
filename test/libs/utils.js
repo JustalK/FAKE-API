@@ -13,7 +13,7 @@ module.exports = {
       body: JSON.stringify(query)
     }
 
-    const response = await fetch('http://' + process.env.HOST + ':' + process.env.PORT + process.env.ENDPOINT, options)
+    const response = await fetch(process.env.PROTOCOL + '://' + process.env.HOST + ':' + process.env.PORT + process.env.ENDPOINT, options)
     const response_json = await response.json()
     return response_json.errors !== undefined ? response_json : response_json.data
   },
@@ -28,7 +28,7 @@ module.exports = {
       headers: { 'Content-Type': 'application/json' }
     }
 
-    const response = await fetch('http://' + process.env.HOST + ':' + process.env.PORT + url, options)
+    const response = await fetch(process.env.PROTOCOL + '://' + process.env.HOST + ':' + process.env.PORT + url, options)
     return response.json()
   }
 }

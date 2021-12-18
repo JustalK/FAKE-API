@@ -56,7 +56,7 @@ module.exports = {
           version: '1.0.0'
         },
         servers: [{
-          url: 'http://' + process.env.HOST + ':' + process.env.PORT
+          url: process.env.PROTOCOL + '://' + process.env.HOST + ':' + process.env.PORT
         }]
       },
       apis: ['src/routes/*.js']
