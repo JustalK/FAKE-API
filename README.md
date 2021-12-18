@@ -1,8 +1,10 @@
-# TEST-API
+# FAKE-API
+
+![Alt text](documentation/logo.png?raw=true "FAKE-API")
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/55bbff204f62104c7c8d/maintainability)](https://codeclimate.com/github/JustalK/SERVER-API/maintainability)
 
-This project is a complete post `GraphQL` and `Rest` Crud API. The documentation is exhaustive and has been done with `graphql-voyager`, `swagger` and `jsdoc`. Feel free to play with it for your different projects.
+This project is a complete `GraphQL` and `Rest` Crud API for managing posts. The documentation is exhaustive and has been done with `graphql-voyager`, `swagger` and `jsdoc`. Feel free to play with it for your different projects.
 
 
 - **REST**: [https://labo-test-api.herokuapp.com/api/rest](https://labo-test-api.herokuapp.com/api/rest)
