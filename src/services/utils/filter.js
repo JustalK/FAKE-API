@@ -4,6 +4,7 @@
 */
 'use strict'
 
+const RegexParser = require('regex-parser')
 const constants = require('@src/libs/constants')
 
 /**
@@ -73,6 +74,24 @@ module.exports = {
     }
 
     return match
+  },
+  /**
+  * Handle the regex argument
+  * @param {String} match The key on what we gonna apply the match
+  * @return {String} The match key
+  **/
+  handle_regex_argument: match => {
+    if (!match) {
+      return null
+    }
+
+    try {
+      // Test if it's a regex
+      match.test('test')
+      return match
+    } catch {
+      return RegexParser(match)
+    }
   },
   /**
   * Handle the joint argument

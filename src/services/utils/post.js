@@ -39,8 +39,8 @@ module.exports = {
     const skip = utils_filter.handle_skip_argument(args.skip)
     const order = utils_filter.handle_order_argument(args.order)
     const joint = utils_filter.handle_joint_argument(args.joint)
-    const title = utils_filter.handle_match_argument(args.title)
-    const content = utils_filter.handle_match_argument(args.content)
+    const title = utils_filter.handle_regex_argument(args.title)
+    const content = utils_filter.handle_regex_argument(args.content)
     return dbs.get_posts({ limit, skip, sort, order, joint, title, content })
   },
   /**
