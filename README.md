@@ -1,9 +1,6 @@
 # TEST-API
 
-[![Travis](https://img.shields.io/travis/com/justalk/server-api.svg?style=flat-square)](https://travis-ci.com/github/JustalK/server-api)
-[![Coverage Status](https://coveralls.io/repos/github/JustalK/SERVER-API/badge.svg?branch=master)](https://coveralls.io/github/JustalK/SERVER-API?branch=master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/7e6edeed2150efaa35bd/maintainability)](https://codeclimate.com/github/JustalK/SERVER-API/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/7e6edeed2150efaa35bd/test_coverage)](https://codeclimate.com/github/JustalK/SERVER-API/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/55bbff204f62104c7c8d/maintainability)](https://codeclimate.com/github/JustalK/SERVER-API/maintainability)
 
 This project is a simple fake API. For testing purpose on my different projects, I was using most of the time one of the API below :
 
