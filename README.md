@@ -1,5 +1,10 @@
 # TEST-API
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/55bbff204f62104c7c8d/maintainability)](https://codeclimate.com/github/JustalK/SERVER-API/maintainability)
+
+This project is a complete post `GraphQL` and `Rest` Crud API. The documentation is exhaustive and has been done with `graphql-voyager`, `swagger` and `jsdoc`. Feel free to play with it for your different projects.
+
+
 - **REST**: [https://labo-test-api.herokuapp.com/api/rest](https://labo-test-api.herokuapp.com/api/rest)
 - **GRAPHQL**: [https://labo-test-api.herokuapp.com/api/graphql](https://labo-test-api.herokuapp.com/api/graphql)
 
@@ -14,16 +19,6 @@
  </code>
 </pre>
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/55bbff204f62104c7c8d/maintainability)](https://codeclimate.com/github/JustalK/SERVER-API/maintainability)
-
-This project is a simple fake API. For testing purpose on my different projects, I was using randomuser or jsonplaceholder.
-
-Those projects are quite nice but they are missing some features. The most obvious one are the filters.
-I needed for few projects an api with some limit and skip filter for creating a pagination. Since the API was not done and I was handling only the Frontend, I needed a bunch of fake data for already coding the pages.
-Since I was not able to find online any fake api which have those filters, I decided to create my own fake API. And since I was on it, why not make it as beautiful as possible ? This is why you will find a quite high coverage, many comment across the code, a complete jsdoc and a really nice architecture.
-
-I made the API in two version, one is a `graphql` version, the other one is a `rest` version. They use the same services, so the result and the query parameters are the same for both version.
-
 ## Plan of the presentation
 
 I explain with all the details how I build the project and my way of working.
@@ -31,6 +26,7 @@ I explain with all the details how I build the project and my way of working.
 - [Documentation](#documentation)
 - [Organization](#organization)
 - [Technologies](#technologies)
+- [Motivation](#motivation)
 - [Development](#development)
 - [Seeding](#seeding)
 - [Testing](#testing)
@@ -45,35 +41,27 @@ I explain with all the details how I build the project and my way of working.
 
 The documentation of the server can be access at this endpoint. It gives information about the server, the tools and how to use the API. Open a browser and go to the following URL :
 
-```
-WEB: https://labo-test-api.herokuapp.com/documentation
-LOCAL: http://localhost:5000/documentation
-```
+<pre><code>WEB: <a href="https://labo-test-api.herokuapp.com/documentation">https://labo-test-api.herokuapp.com/documentation</a>
+Local: <a href="http://localhost:5000/documentation">http://localhost:5000/documentation</a></code></pre>
 
 #### Api rest documentation
 
 The documentation for the rest version of the API :
 
-```
-WEB: https://labo-test-api.herokuapp.com/api/rest
-LOCAL: http://localhost:5000/api/rest
-```
+<pre><code>WEB: <a href="https://labo-test-api.herokuapp.com/api/rest">https://labo-test-api.herokuapp.com/api/rest</a>
+Local: <a href="http://localhost:5000/api/rest">http://localhost:5000/api/rest</a></code></pre>
 
 #### Api graphql documentation
 
 The documentation for the graphql version of the API :
 
-```
-WEB: https://labo-test-api.herokuapp.com/api/graphql
-LOCAL: http://localhost:5000/api/graphql
-```
+<pre><code>WEB: <a href="https://labo-test-api.herokuapp.com/api/graphql">https://labo-test-api.herokuapp.com/api/graphql</a>
+Local: <a href="http://localhost:5000/api/graphql">http://localhost:5000/api/graphql</a></code></pre>
 
 You can also see the graph with `graphql-voyager`
 
-```
-WEB: https://labo-test-api.herokuapp.com/erd
-LOCAL: http://localhost:5000/erd
-```
+<pre><code>WEB: <a href="https://labo-test-api.herokuapp.com/erd">https://labo-test-api.herokuapp.com/erd</a>
+Local: <a href="http://localhost:5000/erd">http://localhost:5000/erd</a></code></pre>
 
 #### Code documentation
 
