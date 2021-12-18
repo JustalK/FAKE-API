@@ -87,4 +87,39 @@ router.get('/', cors(), async (request, response) => {
   response.send(posts)
 })
 
+/**
+ * @swagger
+ * /post:
+ *   post:
+ *     tags:
+ *     - "Posts"
+ *     summary: "Create a post"
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: The title of the post
+ *                 example: My title
+ *               content:
+ *                 type: string
+ *                 description: The content of the post
+ *                 example: My content
+ *     responses:
+ *       200:
+ *         description: Returns the status of the api
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Post'
+ */
+router.post('/', cors(), async (request, response) => {
+  const post = await utils_post.add_post_by_args(request.body)
+  response.send(post)
+})
+
 module.exports = router

@@ -176,6 +176,12 @@ test('[VISITOR][GRAPHQL] Add a post by args', async t => {
   t.is(response.add_post_by_args.content, 'My test content')
 })
 
+test.only('[VISITOR][REST] Add a post by args', async t => {
+  const response = await queries_rest.add_post_by_args('/post', { title: 'My Rest title', content: 'My Rest content' })
+  t.is(response.title, 'My Rest title')
+  t.is(response.content, 'My Rest content')
+})
+
 test('[VISITOR][GRAPHQL] Add a post by args with missing content arg', async t => {
   const response = await queries_graphql.add_post_by_args({ title: 'My test title' })
   t.is(response.errors[0].message, 'Field "add_post_by_args" argument "content" of type "String!" is required, but it was not provided.')

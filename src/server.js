@@ -6,6 +6,7 @@
 
 const express = require('express')
 const voyagerMiddleware = require('graphql-voyager/middleware')
+const bodyParser = require("body-parser")
 const apollo = require('@src/apollo')
 const logger = require('@src/libs/logger')
 const crontab = require('@src/crontab/crontab')
@@ -82,6 +83,14 @@ module.exports = {
     server.options('*', cors())
   },
   /**
+  * Allow us to use the body parameter for rest api
+  * @param {Express} server The server allowed to use helmet
+  **/
+  register_body_parser: (server) => {
+    server.use(bodyParser.urlencoded({ extended: false }))
+    server.use(bodyParser.json())
+  },
+  /**
   * Start the server using the parameter
   * @param {string} name The name of the server
   * @param {string} host The host of the server
@@ -93,6 +102,7 @@ module.exports = {
     crontab.start()
 
     module.exports.register_cors(server)
+    module.exports.register_body_parser(server)
     module.exports.register_swagger(server)
     module.exports.register_graphql(server)
     module.exports.register_voyager(server)

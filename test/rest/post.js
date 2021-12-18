@@ -20,5 +20,12 @@ module.exports = {
 
     const queries = params.length > 0 ? `?${params.join('&')}` : ''
     return m_utils.get_rest(url + queries)
+  },
+  /**
+  * Make a rest request query to the API for getting muliple posts restricted by the filters
+  * @return {[Post]} The posts searched or empty array
+  **/
+  add_post_by_args: async (url, { title, content }) => {
+    return m_utils.post_rest(url, { title, content })
   }
 }
