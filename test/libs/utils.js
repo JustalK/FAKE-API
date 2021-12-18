@@ -20,28 +20,18 @@ module.exports = {
   /**
   * Return the result of a get on rest api
   * @param {String} url The url endpoint
-  * @return {Object} The result of the query
-  **/
-  get_rest: async (url) => {
-    const options = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    }
-
-    const response = await fetch(process.env.PROTOCOL + '://' + process.env.HOST + ':' + process.env.PORT + url, options)
-    return response.json()
-  },
-  /**
-  * Create a post request on the rest API
-  * @param {String} url The url endpoint
+  * @param {String} method The method of the call
   * @param {String} params The params endpoint
   * @return {Object} The result of the query
   **/
-  post_rest: async (url, params) => {
+  call_rest: async (url, method, params) => {
     const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(params)
+      method: method,
+      headers: { 'Content-Type': 'application/json' }
+    }
+
+    if (params) {
+      options.body = JSON.stringify(params)
     }
 
     const response = await fetch(process.env.PROTOCOL + '://' + process.env.HOST + ':' + process.env.PORT + url, options)
